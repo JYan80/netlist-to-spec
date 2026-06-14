@@ -1,0 +1,425 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2019  Clifford Wolf <clifford@clifford.at>           |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.9 (git sha1 1979e0b)
+
+
+-- Executing script file `inventory.ys' --
+
+1. Executing Verilog-2005 frontend: ./SC_LIB_SCH.v
+Parsing Verilog input from `./SC_LIB_SCH.v' to AST representation.
+Generating RTLIL representation for module `\SC_AND2B2_140_90D2'.
+Generating RTLIL representation for module `\SC_AND2B2_140_90D4'.
+Generating RTLIL representation for module `\SC_AND2_50_30'.
+Generating RTLIL representation for module `\SC_AND2_100_40'.
+Generating RTLIL representation for module `\SC_AND2_100_90'.
+Generating RTLIL representation for module `\SC_AND2_140_80'.
+Generating RTLIL representation for module `\SC_AND2_140_90D2'.
+Generating RTLIL representation for module `\SC_AND2_140_90D4'.
+Generating RTLIL representation for module `\SC_AND3B1_120_70'.
+Generating RTLIL representation for module `\SC_AND3B1_130_80'.
+Generating RTLIL representation for module `\SC_AND3B12_140_90D4'.
+Generating RTLIL representation for module `\SC_AND3_50_30'.
+Generating RTLIL representation for module `\SC_AND3_140_80'.
+Generating RTLIL representation for module `\SC_AND4B1_140_70'.
+Generating RTLIL representation for module `\SC_AND4B34_140_80'.
+Generating RTLIL representation for module `\SC_AND4_140_80'.
+Generating RTLIL representation for module `\SC_AO12_140_80'.
+Generating RTLIL representation for module `\SC_AO13_140_80'.
+Generating RTLIL representation for module `\SC_AO22_140_80'.
+Generating RTLIL representation for module `\SC_AO22_140_90D2'.
+Generating RTLIL representation for module `\SC_AO112_140_80'.
+Generating RTLIL representation for module `\SC_AO112_140_90D2'.
+Generating RTLIL representation for module `\SC_AO112_140_90D4'.
+Generating RTLIL representation for module `\SC_AO122_140_80'.
+Generating RTLIL representation for module `\SC_AOA112_140_80'.
+Generating RTLIL representation for module `\SC_AOI12_140_90D2'.
+Generating RTLIL representation for module `\SC_AOI12_E100_70'.
+Generating RTLIL representation for module `\SC_AOI22_E100_60'.
+Generating RTLIL representation for module `\SC_AOI112_E100_70'.
+Generating RTLIL representation for module `\SC_BUF_40_30'.
+Generating RTLIL representation for module `\SC_BUF_100_50'.
+Generating RTLIL representation for module `\SC_BUF_100_90'.
+Generating RTLIL representation for module `\SC_BUF_100_90D4'.
+Generating RTLIL representation for module `\SC_BUF_130_80'.
+Generating RTLIL representation for module `\SC_BUF_130_80S1'.
+Generating RTLIL representation for module `\SC_BUF_140X2_100'.
+Generating RTLIL representation for module `\SC_BUF_140_60'.
+Generating RTLIL representation for module `\SC_BUF_140_100'.
+Generating RTLIL representation for module `\SC_BUF_140_100D2'.
+Generating RTLIL representation for module `\SC_BUF_140_100D3'.
+Generating RTLIL representation for module `\SC_BUF_140_100D4'.
+Generating RTLIL representation for module `\SC_BUF_140_100D8'.
+Generating RTLIL representation for module `\SC_CARRY_140_80'.
+Generating RTLIL representation for module `\SC_DFB_140_90'.
+Generating RTLIL representation for module `\SC_DFC_140_90'.
+Generating RTLIL representation for module `\SC_DFS_140_90'.
+Generating RTLIL representation for module `\SC_FNCLOCKGATING_140_80'.
+Generating RTLIL representation for module `\SC_HADD_140_80'.
+Generating RTLIL representation for module `\SC_INV_50_30'.
+Generating RTLIL representation for module `\SC_INV_100_50'.
+Generating RTLIL representation for module `\SC_INV_100_90'.
+Generating RTLIL representation for module `\SC_INV_100_90D2'.
+Generating RTLIL representation for module `\SC_INV_140_60'.
+Generating RTLIL representation for module `\SC_INV_140_100'.
+Generating RTLIL representation for module `\SC_INV_140_100D2'.
+Generating RTLIL representation for module `\SC_INV_140_100D3'.
+Generating RTLIL representation for module `\SC_INV_140_100D4'.
+Generating RTLIL representation for module `\SC_LAC_140_80'.
+Generating RTLIL representation for module `\SC_LAC_140_80S1'.
+Generating RTLIL representation for module `\SC_LAS_140_80'.
+Generating RTLIL representation for module `\SC_MFB_140_80'.
+Generating RTLIL representation for module `\SC_MFC_140_80'.
+Generating RTLIL representation for module `\SC_MFC_140_80S1'.
+Generating RTLIL representation for module `\SC_MFC_140_90D4'.
+Generating RTLIL representation for module `\SC_MFS_140_80'.
+Generating RTLIL representation for module `\SC_MX21_100_50'.
+Generating RTLIL representation for module `\SC_MX21_140_80'.
+Generating RTLIL representation for module `\SC_MX21_140_90'.
+Generating RTLIL representation for module `\SC_MX21_140_90D2'.
+Generating RTLIL representation for module `\SC_NAND2B1_30_30'.
+Generating RTLIL representation for module `\SC_NAND2B1_140_90'.
+Generating RTLIL representation for module `\SC_NAND2B2_140X2_90'.
+Generating RTLIL representation for module `\SC_NAND2B2_140_90'.
+Generating RTLIL representation for module `\SC_NAND2B12_140_80'.
+Generating RTLIL representation for module `\SC_NAND2_30_30'.
+Generating RTLIL representation for module `\SC_NAND2_70_40'.
+Generating RTLIL representation for module `\SC_NAND2_100_90'.
+Generating RTLIL representation for module `\SC_NAND2_140X2_90'.
+Generating RTLIL representation for module `\SC_NAND2_140X3_80'.
+Generating RTLIL representation for module `\SC_NAND2_140_90'.
+Generating RTLIL representation for module `\SC_NAND2_140_90D2'.
+Generating RTLIL representation for module `\SC_NAND3B3_120_90'.
+Generating RTLIL representation for module `\SC_NAND3B12_140_90'.
+Generating RTLIL representation for module `\SC_NAND3_50_40'.
+Generating RTLIL representation for module `\SC_NAND3_120_100'.
+Generating RTLIL representation for module `\SC_NAND3_140_90D4'.
+Generating RTLIL representation for module `\SC_NAND4B1_100_90'.
+Generating RTLIL representation for module `\SC_NAND4B34_120_90'.
+Generating RTLIL representation for module `\SC_NAND4B34_120_90S1'.
+Generating RTLIL representation for module `\SC_NAND4_120_90'.
+Generating RTLIL representation for module `\SC_NOR2B2_120_70'.
+Generating RTLIL representation for module `\SC_NOR2B2_140_70'.
+Generating RTLIL representation for module `\SC_NOR2_30_30'.
+Generating RTLIL representation for module `\SC_NOR2_100_30'.
+Generating RTLIL representation for module `\SC_NOR2_100_90'.
+Generating RTLIL representation for module `\SC_NOR2_140_70'.
+Generating RTLIL representation for module `\SC_NOR2_140_90'.
+Generating RTLIL representation for module `\SC_NOR2_140_90D2'.
+Generating RTLIL representation for module `\SC_NOR3B3_100_30'.
+Generating RTLIL representation for module `\SC_NOR3B3_130_80'.
+Generating RTLIL representation for module `\SC_NOR3_30_30'.
+Generating RTLIL representation for module `\SC_NOR3_100_30'.
+Generating RTLIL representation for module `\SC_NOR3_130_70'.
+Generating RTLIL representation for module `\SC_NOR4B34_130_80'.
+Generating RTLIL representation for module `\SC_OA12_140_80'.
+Generating RTLIL representation for module `\SC_OA12_140_90D2'.
+Generating RTLIL representation for module `\SC_OA13_140_80'.
+Generating RTLIL representation for module `\SC_OA22_140_80'.
+Generating RTLIL representation for module `\SC_OA122_140_80'.
+Generating RTLIL representation for module `\SC_OA211_140_80'.
+Generating RTLIL representation for module `\SC_OAI12_100_E80'.
+Generating RTLIL representation for module `\SC_OAI22_100_E80'.
+Generating RTLIL representation for module `\SC_OAI211_90_E60'.
+Generating RTLIL representation for module `\SC_OAO112_140_80'.
+Generating RTLIL representation for module `\SC_OR2B2_140_90D4'.
+Generating RTLIL representation for module `\SC_OR2_30_30'.
+Generating RTLIL representation for module `\SC_OR2_100_90'.
+Generating RTLIL representation for module `\SC_OR2_140_80'.
+Generating RTLIL representation for module `\SC_OR2_140_90D2'.
+Generating RTLIL representation for module `\SC_OR2_140_90D4'.
+Generating RTLIL representation for module `\SC_OR3_140_80'.
+Generating RTLIL representation for module `\SC_OR4B1_140_90'.
+Generating RTLIL representation for module `\SC_OR4_140_90'.
+Generating RTLIL representation for module `\SC_REGCELL_140_90'.
+Generating RTLIL representation for module `\SC_REGCELL_140_90S1'.
+Generating RTLIL representation for module `\SC_XNOR2_E120_E70'.
+Generating RTLIL representation for module `\SC_XNOR3_140_E90'.
+Generating RTLIL representation for module `\SC_XOR2_140_80'.
+Generating RTLIL representation for module `\SC_XOR2_E120_70'.
+Generating RTLIL representation for module `\SC_XOR3_E140_90'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: ./impl.v
+Parsing Verilog input from `./impl.v' to AST representation.
+Generating RTLIL representation for module `\COUNT_12BX2'.
+./impl.v:45: Warning: Identifier `\X421_73_ZN' is implicitly declared.
+./impl.v:45: Warning: Identifier `\X0_1625_Q' is implicitly declared.
+./impl.v:47: Warning: Identifier `\X467_73_ZN' is implicitly declared.
+./impl.v:47: Warning: Identifier `\X0_1626_Q' is implicitly declared.
+./impl.v:49: Warning: Identifier `\X409_73_ZN' is implicitly declared.
+./impl.v:49: Warning: Identifier `\X1804_Q' is implicitly declared.
+./impl.v:51: Warning: Identifier `\X633_207_ZN' is implicitly declared.
+./impl.v:52: Warning: Identifier `\X1713_Q' is implicitly declared.
+./impl.v:52: Warning: Identifier `\X0_1715_Q' is implicitly declared.
+./impl.v:53: Warning: Identifier `\X4_6_ZN' is implicitly declared.
+./impl.v:54: Warning: Identifier `\X8330_SUM' is implicitly declared.
+./impl.v:54: Warning: Identifier `\X748_5_ZN' is implicitly declared.
+./impl.v:54: Warning: Identifier `\X746_5_ZN' is implicitly declared.
+./impl.v:56: Warning: Identifier `\X28_263_CO' is implicitly declared.
+./impl.v:56: Warning: Identifier `\X63_1886_Q' is implicitly declared.
+./impl.v:56: Warning: Identifier `\X24_263_CO' is implicitly declared.
+./impl.v:58: Warning: Identifier `\X72_330_CO' is implicitly declared.
+./impl.v:58: Warning: Identifier `\X25_263_CO' is implicitly declared.
+./impl.v:60: Warning: Identifier `\X57_10_Q' is implicitly declared.
+./impl.v:60: Warning: Identifier `\X3383_CO' is implicitly declared.
+./impl.v:60: Warning: Identifier `\X26_263_CO' is implicitly declared.
+./impl.v:62: Warning: Identifier `\X630_103_Z' is implicitly declared.
+./impl.v:62: Warning: Identifier `\X27_263_CO' is implicitly declared.
+./impl.v:64: Warning: Identifier `\X32_263_CO' is implicitly declared.
+./impl.v:64: Warning: Identifier `\X1712_Q' is implicitly declared.
+./impl.v:66: Warning: Identifier `\X72_330_SUM' is implicitly declared.
+./impl.v:66: Warning: Identifier `\X3484_ZN' is implicitly declared.
+./impl.v:66: Warning: Identifier `\X29_85_CO' is implicitly declared.
+./impl.v:67: Warning: Identifier `\X29_85_SUM' is implicitly declared.
+./impl.v:69: Warning: Identifier `\X30_6_ZN' is implicitly declared.
+./impl.v:70: Warning: Identifier `\X1796_Q' is implicitly declared.
+./impl.v:70: Warning: Identifier `\X8636_CO' is implicitly declared.
+./impl.v:70: Warning: Identifier `\X30_263_CO' is implicitly declared.
+./impl.v:72: Warning: Identifier `\X8625_CO' is implicitly declared.
+./impl.v:72: Warning: Identifier `\X31_263_CO' is implicitly declared.
+./impl.v:74: Warning: Identifier `\X2492_CO' is implicitly declared.
+./impl.v:74: Warning: Identifier `\X430_309_Q' is implicitly declared.
+./impl.v:76: Warning: Identifier `\X8633_CO' is implicitly declared.
+./impl.v:76: Warning: Identifier `\X1806_Q' is implicitly declared.
+./impl.v:76: Warning: Identifier `\X33_263_CO' is implicitly declared.
+./impl.v:78: Warning: Identifier `\X8638_CO' is implicitly declared.
+./impl.v:78: Warning: Identifier `\X36_263_CO' is implicitly declared.
+./impl.v:80: Warning: Identifier `\X8341_CO' is implicitly declared.
+./impl.v:80: Warning: Identifier `\X59_5_ZN' is implicitly declared.
+./impl.v:80: Warning: Identifier `\X38_85_CO' is implicitly declared.
+./impl.v:81: Warning: Identifier `\X38_85_SUM' is implicitly declared.
+./impl.v:82: Warning: Identifier `\X1795_Q' is implicitly declared.
+./impl.v:82: Warning: Identifier `\X1798_Q' is implicitly declared.
+./impl.v:82: Warning: Identifier `\X46_344_CO' is implicitly declared.
+./impl.v:84: Warning: Identifier `\X1892_CO' is implicitly declared.
+./impl.v:84: Warning: Identifier `\X1849_Q' is implicitly declared.
+./impl.v:84: Warning: Identifier `\X47_344_CO' is implicitly declared.
+./impl.v:86: Warning: Identifier `\X8641_ZN' is implicitly declared.
+./impl.v:88: Warning: Identifier `\X8350_ZN' is implicitly declared.
+./impl.v:89: Warning: Identifier `\X3385_ZN' is implicitly declared.
+./impl.v:91: Warning: Identifier `\X1802_Q' is implicitly declared.
+./impl.v:92: Warning: Identifier `\X72_6_ZN' is implicitly declared.
+./impl.v:93: Warning: Identifier `\X1805_Q' is implicitly declared.
+./impl.v:95: Warning: Identifier `\X8616_Z' is implicitly declared.
+./impl.v:95: Warning: Identifier `\X8619_Z' is implicitly declared.
+./impl.v:96: Warning: Identifier `\X154_21_ZN' is implicitly declared.
+./impl.v:97: Warning: Identifier `\X8343_SUM' is implicitly declared.
+./impl.v:97: Warning: Identifier `\X747_5_ZN' is implicitly declared.
+./impl.v:99: Warning: Identifier `\X1661_SUM' is implicitly declared.
+./impl.v:99: Warning: Identifier `\X625_5_ZN' is implicitly declared.
+./impl.v:102: Warning: Identifier `\X212_6_ZN' is implicitly declared.
+./impl.v:103: Warning: Identifier `\X8617_Z' is implicitly declared.
+./impl.v:103: Warning: Identifier `\X8618_Z' is implicitly declared.
+./impl.v:104: Warning: Identifier `\X214_21_ZN' is implicitly declared.
+./impl.v:105: Warning: Identifier `\X422_73_ZN' is implicitly declared.
+./impl.v:106: Warning: Identifier `\X351_44_Q' is implicitly declared.
+./impl.v:107: Warning: Identifier `\X8279_ZN' is implicitly declared.
+./impl.v:109: Warning: Identifier `\X8340_SUM' is implicitly declared.
+./impl.v:109: Warning: Identifier `\X1033_5_ZN' is implicitly declared.
+./impl.v:111: Warning: Identifier `\X421_Z' is implicitly declared.
+./impl.v:111: Warning: Identifier `\X3382_Z' is implicitly declared.
+./impl.v:112: Warning: Identifier `\X420_ZN' is implicitly declared.
+./impl.v:115: Warning: Identifier `\X605_189_ZN' is implicitly declared.
+./impl.v:115: Warning: Identifier `\X636_64_ZN' is implicitly declared.
+./impl.v:117: Warning: Identifier `\X8275_ZN' is implicitly declared.
+./impl.v:117: Warning: Identifier `\X8526_ZN' is implicitly declared.
+./impl.v:119: Warning: Identifier `\X632_207_ZN' is implicitly declared.
+./impl.v:121: Warning: Identifier `\X630_189_ZN' is implicitly declared.
+./impl.v:121: Warning: Identifier `\X744_64_ZN' is implicitly declared.
+./impl.v:122: Warning: Identifier `\X431_73_ZN' is implicitly declared.
+./impl.v:123: Warning: Identifier `\X8397_ZN' is implicitly declared.
+./impl.v:123: Warning: Identifier `\X8271_ZN' is implicitly declared.
+./impl.v:123: Warning: Identifier `\X8500_ZN' is implicitly declared.
+./impl.v:124: Warning: Identifier `\X432_73_ZN' is implicitly declared.
+./impl.v:125: Warning: Identifier `\X1889_ZN' is implicitly declared.
+./impl.v:125: Warning: Identifier `\X8280_ZN' is implicitly declared.
+./impl.v:126: Warning: Identifier `\X452_73_ZN' is implicitly declared.
+./impl.v:127: Warning: Identifier `\X8403_ZN' is implicitly declared.
+./impl.v:127: Warning: Identifier `\X8276_ZN' is implicitly declared.
+./impl.v:127: Warning: Identifier `\X8519_ZN' is implicitly declared.
+./impl.v:128: Warning: Identifier `\X461_73_ZN' is implicitly declared.
+./impl.v:129: Warning: Identifier `\X8259_ZN' is implicitly declared.
+./impl.v:129: Warning: Identifier `\X745_64_ZN' is implicitly declared.
+./impl.v:132: Warning: Identifier `\X568_189_ZN' is implicitly declared.
+./impl.v:133: Warning: Identifier `\X911_5_ZN' is implicitly declared.
+./impl.v:134: Warning: Identifier `\X569_189_ZN' is implicitly declared.
+./impl.v:136: Warning: Identifier `\X593_189_ZN' is implicitly declared.
+./impl.v:139: Warning: Identifier `\X8352_ZN' is implicitly declared.
+./impl.v:139: Warning: Identifier `\X622_5_ZN' is implicitly declared.
+./impl.v:140: Warning: Identifier `\X623_5_ZN' is implicitly declared.
+./impl.v:141: Warning: Identifier `\X661_189_ZN' is implicitly declared.
+./impl.v:141: Warning: Identifier `\X8559_ZN' is implicitly declared.
+./impl.v:142: Warning: Identifier `\X624_185_ZN' is implicitly declared.
+./impl.v:143: Warning: Identifier `\X8347_ZN' is implicitly declared.
+./impl.v:148: Warning: Identifier `\X8411_ZN' is implicitly declared.
+./impl.v:148: Warning: Identifier `\X8549_ZN' is implicitly declared.
+./impl.v:150: Warning: Identifier `\X8261_ZN' is implicitly declared.
+./impl.v:150: Warning: Identifier `\X8522_ZN' is implicitly declared.
+./impl.v:152: Warning: Identifier `\X8418_ZN' is implicitly declared.
+./impl.v:152: Warning: Identifier `\X8258_ZN' is implicitly declared.
+./impl.v:153: Warning: Identifier `\X634_207_ZN' is implicitly declared.
+./impl.v:156: Warning: Identifier `\X8557_ZN' is implicitly declared.
+./impl.v:157: Warning: Identifier `\X649_290_ZN' is implicitly declared.
+./impl.v:158: Warning: Identifier `\X1797_Q' is implicitly declared.
+./impl.v:158: Warning: Identifier `\X3510_ZN' is implicitly declared.
+./impl.v:161: Warning: Identifier `\X684_189_ZN' is implicitly declared.
+./impl.v:163: Warning: Identifier `\X688_189_ZN' is implicitly declared.
+./impl.v:165: Warning: Identifier `\X703_103_Z' is implicitly declared.
+./impl.v:171: Warning: Identifier `\X8351_ZN' is implicitly declared.
+./impl.v:172: Warning: Identifier `\X8353_ZN' is implicitly declared.
+./impl.v:173: Warning: Identifier `\X8349_ZN' is implicitly declared.
+./impl.v:173: Warning: Identifier `\X751_5_ZN' is implicitly declared.
+./impl.v:178: Warning: Identifier `\X3342_ZN' is implicitly declared.
+./impl.v:179: Warning: Identifier `\X8354_ZN' is implicitly declared.
+./impl.v:180: Warning: Identifier `\X8346_CO' is implicitly declared.
+./impl.v:180: Warning: Identifier `\X1661_CO' is implicitly declared.
+./impl.v:184: Warning: Identifier `\X8646_ZN' is implicitly declared.
+./impl.v:186: Warning: Identifier `\X8644_ZN' is implicitly declared.
+./impl.v:194: Warning: Identifier `\X8645_ZN' is implicitly declared.
+./impl.v:196: Warning: Identifier `\X8647_ZN' is implicitly declared.
+./impl.v:197: Warning: Identifier `\X1801_Q' is implicitly declared.
+./impl.v:200: Warning: Identifier `\X8655_ZN' is implicitly declared.
+./impl.v:201: Warning: Identifier `\X1803_Q' is implicitly declared.
+./impl.v:206: Warning: Identifier `\X8648_ZN' is implicitly declared.
+./impl.v:208: Warning: Identifier `\X8640_ZN' is implicitly declared.
+./impl.v:210: Warning: Identifier `\X1890_Z' is implicitly declared.
+./impl.v:210: Warning: Identifier `\X8621_Z' is implicitly declared.
+./impl.v:212: Warning: Identifier `\X1891_CO' is implicitly declared.
+./impl.v:214: Warning: Identifier `\X8637_CO' is implicitly declared.
+./impl.v:218: Warning: Identifier `\X8634_CO' is implicitly declared.
+./impl.v:221: Warning: Identifier `\X2503_Z' is implicitly declared.
+./impl.v:223: Warning: Identifier `\X2504_Z' is implicitly declared.
+./impl.v:225: Warning: Identifier `\X2505_Z' is implicitly declared.
+./impl.v:227: Warning: Identifier `\X2506_Z' is implicitly declared.
+./impl.v:232: Warning: Identifier `\X8627_CO' is implicitly declared.
+./impl.v:235: Warning: Identifier `\X3384_Z' is implicitly declared.
+./impl.v:236: Warning: Identifier `\X8405_ZN' is implicitly declared.
+./impl.v:236: Warning: Identifier `\X8277_ZN' is implicitly declared.
+./impl.v:236: Warning: Identifier `\X8511_ZN' is implicitly declared.
+./impl.v:238: Warning: Identifier `\X8348_ZN' is implicitly declared.
+./impl.v:239: Warning: Identifier `\X8355_ZN' is implicitly declared.
+./impl.v:247: Warning: Identifier `\X8267_ZN' is implicitly declared.
+./impl.v:248: Warning: Identifier `\X8631_CO' is implicitly declared.
+./impl.v:249: Warning: Identifier `\X8269_ZN' is implicitly declared.
+./impl.v:251: Warning: Identifier `\X8270_ZN' is implicitly declared.
+./impl.v:255: Warning: Identifier `\X8274_ZN' is implicitly declared.
+./impl.v:263: Warning: Identifier `\X8278_ZN' is implicitly declared.
+./impl.v:268: Warning: Identifier `\X8340_CO' is implicitly declared.
+./impl.v:269: Warning: Identifier `\X8294_Z' is implicitly declared.
+./impl.v:270: Warning: Identifier `\X8330_CO' is implicitly declared.
+./impl.v:275: Warning: Identifier `\X8341_SUM' is implicitly declared.
+./impl.v:276: Warning: Identifier `\X8343_CO' is implicitly declared.
+./impl.v:276: Warning: Identifier `\X8342_CO' is implicitly declared.
+./impl.v:277: Warning: Identifier `\X8342_SUM' is implicitly declared.
+./impl.v:280: Warning: Identifier `\X8344_CO' is implicitly declared.
+./impl.v:281: Warning: Identifier `\X8344_SUM' is implicitly declared.
+./impl.v:283: Warning: Identifier `\X8346_SUM' is implicitly declared.
+./impl.v:294: Warning: Identifier `\X8629_CO' is implicitly declared.
+./impl.v:298: Warning: Identifier `\X8632_CO' is implicitly declared.
+./impl.v:304: Warning: Identifier `\X8613_Z' is implicitly declared.
+./impl.v:304: Warning: Identifier `\X8615_Z' is implicitly declared.
+./impl.v:306: Warning: Identifier `\X8614_Z' is implicitly declared.
+./impl.v:308: Warning: Identifier `\X8630_CO' is implicitly declared.
+./impl.v:309: Warning: Identifier `\X8409_ZN' is implicitly declared.
+./impl.v:312: Warning: Identifier `\X8620_Z' is implicitly declared.
+./impl.v:312: Warning: Identifier `\X8623_Z' is implicitly declared.
+./impl.v:314: Warning: Identifier `\X8622_Z' is implicitly declared.
+./impl.v:314: Warning: Identifier `\X8624_Z' is implicitly declared.
+./impl.v:315: Warning: Identifier `\X8419_ZN' is implicitly declared.
+./impl.v:319: Warning: Identifier `\X8510_ZN' is implicitly declared.
+./impl.v:323: Warning: Identifier `\X8514_ZN' is implicitly declared.
+./impl.v:324: Warning: Identifier `\X8515_ZN' is implicitly declared.
+./impl.v:326: Warning: Identifier `\X8517_ZN' is implicitly declared.
+./impl.v:334: Warning: Identifier `\X8527_ZN' is implicitly declared.
+./impl.v:335: Warning: Identifier `\X8531_ZN' is implicitly declared.
+./impl.v:337: Warning: Identifier `\X8543_ZN' is implicitly declared.
+./impl.v:357: Warning: Identifier `\X8635_CO' is implicitly declared.
+./impl.v:365: Warning: Identifier `\X8626_CO' is implicitly declared.
+./impl.v:373: Warning: Identifier `\X8628_CO' is implicitly declared.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \COUNT_12BX2
+
+3.2. Analyzing design hierarchy..
+Top module:  \COUNT_12BX2
+Removed 0 unused modules.
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_INIT pass (extract init attributes).
+
+4.4. Executing PROC_ARST pass (detect async resets in processes).
+
+4.5. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+4.6. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.7. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \COUNT_12BX2..
+
+6. Printing statistics.
+
+=== COUNT_12BX2 ===
+
+   Number of wires:                221
+   Number of wire bits:            240
+   Number of public wires:         221
+   Number of public wire bits:     240
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                196
+     SC_AND2_50_30                   2
+     SC_AO22_140_80                 11
+     SC_AOI22_E100_60               22
+     SC_CARRY_140_80                30
+     SC_HADD_140_80                 11
+     SC_INV_140_60                  12
+     SC_MFC_140_80                  22
+     SC_NAND2_70_40                 22
+     SC_OAI211_90_E60               22
+     SC_OAI22_100_E80               11
+     SC_XNOR3_140_E90               10
+     SC_XOR2_E120_70                 1
+     SC_XOR3_E140_90                20
+
+7. Executing JSON backend.
+
+Warnings: 194 unique messages, 194 total
+End of script. Logfile hash: 272735e976
+CPU: user 0.09s system 0.01s, MEM: 19.00 MB total, 12.75 MB resident
+Yosys 0.9 (git sha1 1979e0b)
+Time spent: 49% 4x read_verilog (0 sec), 22% 1x proc_dff (0 sec), ...

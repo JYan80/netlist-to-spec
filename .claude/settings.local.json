@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(yosys -V)",
+      "Bash(abc -h)",
+      "Bash(yosys -s analyze.ys)",
+      "Bash(yosys -s analyze2.ys)",
+      "Bash(yosys -s extract_ns.ys)",
+      "Bash(python3 *)",
+      "Bash(yosys --version)",
+      "Bash(yosys -p \"help\")",
+      "Bash(yosys -p \"echo version_ok\")",
+      "Bash(/home/wsl2/formal/RE-Agent/yosys/abc -h)",
+      "Bash(yosys -p \"help async2sync\")",
+      "Bash(yosys -p \"help miter\")",
+      "Bash(yosys -p \"help sat\")",
+      "Bash(yosys -p \"help aigmap\")",
+      "Bash(yosys -p \"help write_aiger\")",
+      "Bash(dpkg -l yosys)",
+      "Bash(dpkg -L yosys)",
+      "Bash(/usr/bin/yosys-abc -h)",
+      "Bash(python scripts/check_equiv.py --spec selftest/gold.v --top-spec selftest_gold --netlist selftest/copy.v --top-gate selftest_copy --mode prove --out-dir selftest/out_copy)",
+      "Bash(yosys /tmp/test_bounded.ys)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(yosys /tmp/test_bounded2.ys)",
+      "Bash(yosys /tmp/test_bounded3.ys)",
+      "Bash(yosys /tmp/test_bounded_pass.ys)",
+      "Bash(yosys /tmp/test_no_async2sync.ys)",
+      "Bash(yosys /tmp/test_no_async2sync_pass.ys)",
+      "Bash(yosys /tmp/test_prove_bad.ys)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(yosys /tmp/test_with_reset.ys)",
+      "Bash(yosys /tmp/test_miter_ports.ys)",
+      "Bash(yosys /tmp/test_miter_stat.ys)",
+      "Bash(yosys /tmp/check_miter.ys)",
+      "Bash(yosys /tmp/extract_ns.ys)",
+      "Bash(yosys -p \"read_verilog COUNT_12BX2/spec_candidate.v; hierarchy -check; proc\")",
+      "Bash(grep '^\\\\$var' /home/wsl2/formal/RE-Agent/COUNT_12BX2/equiv_out/cex.vcd)"
+    ]
+  }
+}

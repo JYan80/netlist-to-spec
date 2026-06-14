@@ -1,0 +1,226 @@
+#!/usr/bin/env python3
+"""
+parse_cex.py -- parse a yosys sat VCD counterexample into structured JSON.
+Usage: python scripts/parse_cex.py --vcd cex.vcd --out cex.json
+
+The yosys sat miter VCD contains gate and gold signals with prefixes like
+  _techmap\\gate.<name>  and  _techmap\\gold.<name>
+This parser finds pairs of gate/gold signals that differ and reports them.
+"""
+import argparse, json, re, sys
+
+
+def parse_vcd(vcd_path):
+    """Minimal VCD parser. Returns (signals, snapshots).
+    signals: {id: {'name': str, 'width': int}}
+    snapshots: list of {time: int, state: {id: str}} -- full state at each time
+    """
+    signals = {}
+
+    with open(vcd_path) as f:
+        content = f.read()
+
+    # Parse $var declarations
+    var_re = re.compile(r'\$var\s+\S+\s+(\d+)\s+(\S+)\s+(\S+)(?:\s+\[[\d:]+\])?\s+\$end')
+    for m in var_re.finditer(content):
+        width, vid, name = int(m.group(1)), m.group(2), m.group(3)
+        signals[vid] = {"name": name, "width": width}
+
+    # Find body after last $end header
+    body_start = content.find("$dumpvars")
+    if body_start == -1:
+        body_start = content.rfind("$end")
+    body = content[body_start:]
+
+    current_time = 0
+    current_state = {}
+    snapshots = []
+
+    for line in body.splitlines():
+        line = line.strip()
+        if not line or line.startswith("$end") or line.startswith("$dump"):
+            continue
+        if line.startswith("#"):
+            if current_state:
+                snapshots.append({"time": current_time, "state": dict(current_state)})
+                current_state = {}
+            current_time = int(line[1:])
+        elif line[0] in "01xzXZ" and len(line) > 1:
+            val, vid = line[0], line[1:]
+            current_state[vid] = val
+        elif line.startswith("b") or line.startswith("B"):
+            parts = line.split()
+            if len(parts) == 2:
+                val, vid = parts[0][1:], parts[1]
+                current_state[vid] = val
+
+    if current_state:
+        snapshots.append({"time": current_time, "state": dict(current_state)})
+
+    # Also collect initial assignments from $dumpvars block
+    # These may be the first snapshot at time 0
+    init_state = {}
+    in_dumpvars = False
+    for line in body.splitlines():
+        line = line.strip()
+        if "$dumpvars" in line:
+            in_dumpvars = True
+            continue
+        if "$end" in line:
+            if in_dumpvars and init_state:
+                # Insert as time-0 snapshot if not already present
+                if not snapshots or snapshots[0]["time"] != 0:
+                    snapshots.insert(0, {"time": 0, "state": dict(init_state)})
+            in_dumpvars = False
+            init_state = {}
+            continue
+        if in_dumpvars:
+            if line.startswith("#"):
+                in_dumpvars = False
+            elif line[0:1] in "01xzXZ" and len(line) > 1:
+                val, vid = line[0], line[1:]
+                init_state[vid] = val
+            elif line.startswith("b") or line.startswith("B"):
+                parts = line.split()
+                if len(parts) == 2:
+                    val, vid = parts[0][1:], parts[1]
+                    init_state[vid] = val
+
+    return signals, snapshots
+
+
+def normalize_name(name):
+    """Normalize signal name: strip backslash escapes, normalize separators."""
+    return name.replace("\\", "").replace(".", "_")
+
+
+def extract_base(name):
+    """Strip gate/gold prefix from signal name to get the logical signal name.
+    Handles patterns like:
+      _techmap_gate_xxx   → xxx
+      _techmap_gold_xxx   → xxx
+      gate_xxx            → xxx
+      gold_xxx            → xxx
+    """
+    n = normalize_name(name)
+    for pat in ["_techmap_gate_", "_techmap_gold_", "gate_", "gold_"]:
+        if n.startswith(pat):
+            return n[len(pat):]
+    return n
+
+
+def get_side(name):
+    """Return 'gate', 'gold', or None."""
+    n = normalize_name(name)
+    for pat in ["_techmap_gate_", "gate_"]:
+        if n.startswith(pat):
+            return "gate"
+    for pat in ["_techmap_gold_", "gold_"]:
+        if n.startswith(pat):
+            return "gold"
+    return None
+
+
+def find_divergences(signals, snapshots):
+    """Find gate/gold signal pairs that differ across all snapshots."""
+    # Build base-name → {gate: id, gold: id} maps
+    base_map = {}  # base_name → {side: vid}
+    for vid, info in signals.items():
+        side = get_side(info["name"])
+        base = extract_base(info["name"])
+        if side and base:
+            base_map.setdefault(base, {})[side] = vid
+
+    failing = []
+    input_trace = []
+    seen_bases = set()
+
+    for snap in snapshots:
+        cycle = snap["time"]
+        state = snap["state"]
+        step_diff = []
+
+        for base, sides in base_map.items():
+            gate_id = sides.get("gate")
+            gold_id = sides.get("gold")
+            if gate_id and gold_id:
+                gate_val = state.get(gate_id)
+                gold_val = state.get(gold_id)
+                if gate_val is not None and gold_val is not None:
+                    if gate_val != gold_val:
+                        step_diff.append({
+                            "signal": base,
+                            "cycle": cycle,
+                            "gate": gate_val,
+                            "gold": gold_val,
+                        })
+
+        if step_diff:
+            for d in step_diff:
+                key = (d["signal"], d["cycle"])
+                if key not in seen_bases:
+                    seen_bases.add(key)
+                    failing.append({"signal": d["signal"], "bit": 0, "cycle": d["cycle"],
+                                    "gate": d["gate"], "gold": d["gold"]})
+
+        # Build input trace: all non-gate/gold signals + raw values
+        visible = {}
+        for vid, val in state.items():
+            name = signals.get(vid, {}).get("name", vid)
+            visible[normalize_name(name)] = val
+        if visible:
+            input_trace.append({"time": cycle, "values": visible})
+
+    # If no paired divergences found, report any signals that changed
+    if not failing:
+        prev_state = {}
+        for snap in snapshots:
+            for vid, val in snap["state"].items():
+                prev = prev_state.get(vid)
+                if prev is not None and prev != val:
+                    name = signals.get(vid, {}).get("name", vid)
+                    failing.append({"signal": normalize_name(name), "bit": 0,
+                                    "cycle": snap["time"], "from": prev, "to": val})
+                prev_state[vid] = val
+
+    return failing, input_trace
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--vcd", required=True)
+    ap.add_argument("--out", default="cex.json")
+    args = ap.parse_args()
+
+    try:
+        signals, snapshots = parse_vcd(args.vcd)
+    except FileNotFoundError:
+        sys.exit(f"ERROR: VCD file not found: {args.vcd}")
+    except Exception as e:
+        sys.exit(f"ERROR parsing VCD: {e}")
+
+    if not snapshots and not signals:
+        sys.exit("ERROR: VCD has no time steps (empty or malformed)")
+
+    failing, input_trace = find_divergences(signals, snapshots)
+
+    result = {
+        "failing": failing[:20],
+        "input_trace": input_trace[:50],
+        "total_signals": len(signals),
+        "total_timesteps": len(snapshots),
+    }
+
+    with open(args.out, "w") as f:
+        json.dump(result, f, indent=2)
+
+    print(f"CEX parsed: {len(failing)} divergences, {len(snapshots)} time steps → {args.out}")
+    if failing:
+        f0 = failing[0]
+        print(f"  First divergence: '{f0['signal']}' at cycle {f0['cycle']}: gate={f0.get('gate','?')} gold={f0.get('gold','?')}")
+    else:
+        print("  No gate/gold signal pairs found; check VCD signal naming.")
+
+
+if __name__ == "__main__":
+    main()

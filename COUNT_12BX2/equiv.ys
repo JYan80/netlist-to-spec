@@ -1,0 +1,26 @@
+# gate 侧
+read_verilog COUNT_12BX2/SC_LIB_SCH.v
+read_verilog COUNT_12BX2/impl.v
+prep -top COUNT_12BX2
+flatten
+async2sync
+design -save gate_save
+
+# gold 侧
+design -reset
+read_verilog COUNT_12BX2/SC_LIB_SCH.v
+read_verilog COUNT_12BX2/spec.v
+prep -top COUNT_12BX2_spec
+flatten
+async2sync
+design -save gold_save
+
+# 等价检查
+design -reset
+design -copy-from gate_save -as gate COUNT_12BX2
+design -copy-from gold_save -as gold COUNT_12BX2_spec
+equiv_make gold gate equiv
+hierarchy -top equiv
+equiv_simple
+equiv_induct
+equiv_status -assert

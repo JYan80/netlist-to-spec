@@ -1,0 +1,658 @@
+{
+  "top": "COUNT_12BX2",
+  "ports": [
+    {
+      "name": "COUNT0",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "COUNT1N",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "COUNT2",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "COUNT3N",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "CTRL0",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "CTRL1",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "CTRL2",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "DT",
+      "dir": "input",
+      "width": 2
+    },
+    {
+      "name": "HOLD0",
+      "dir": "input",
+      "width": 3
+    },
+    {
+      "name": "HOLD1",
+      "dir": "input",
+      "width": 3
+    },
+    {
+      "name": "MI1_QT",
+      "dir": "output",
+      "width": 2
+    },
+    {
+      "name": "MI1_SUM",
+      "dir": "output",
+      "width": 11
+    },
+    {
+      "name": "MI44_Q",
+      "dir": "input",
+      "width": 4
+    },
+    {
+      "name": "SET0N",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "SET1",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "SET2",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "SET3",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "SET4",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "SET5",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X3_323_Z",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X19_GS",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X19_VS",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X412_46_Z",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X1026_138_ZN",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X1027_138_ZN",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X1676_Z",
+      "dir": "input",
+      "width": 1
+    },
+    {
+      "name": "X8710_Z",
+      "dir": "input",
+      "width": 1
+    }
+  ],
+  "dffs": [
+    {
+      "inst": "X0_1625",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1026_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X0_1625_Q",
+      "d_net": "X467_73_ZN",
+      "inverted": false,
+      "d1_net": "X0_1626_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X0_1626",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1026_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X0_1626_Q",
+      "d_net": "X409_73_ZN",
+      "inverted": false,
+      "d1_net": "X1804_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X0_1715",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X0_1715_Q",
+      "d_net": "X633_207_ZN",
+      "inverted": false,
+      "d1_net": "X1713_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X0_335",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1026_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "MI1_QT[0]",
+      "d_net": "X421_73_ZN",
+      "inverted": false,
+      "d1_net": "X0_1625_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1712",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1712_Q",
+      "d_net": "X649_290_ZN",
+      "inverted": false,
+      "d1_net": "X351_44_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X1713",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1713_Q",
+      "d_net": "X8646_ZN",
+      "inverted": false,
+      "d1_net": "X430_309_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X1795",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X1676_Z",
+      "q_net": "X1795_Q",
+      "d_net": "X8644_ZN",
+      "inverted": false,
+      "d1_net": "X1798_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X1796",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1796_Q",
+      "d_net": "X432_73_ZN",
+      "inverted": false,
+      "d1_net": "X0_1715_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X1797",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1797_Q",
+      "d_net": "X624_185_ZN",
+      "inverted": false,
+      "d1_net": "X1796_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X1798",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X1676_Z",
+      "q_net": "X1798_Q",
+      "d_net": "X461_73_ZN",
+      "inverted": false,
+      "d1_net": "DT[1]",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X1800",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X1676_Z",
+      "q_net": "MI1_QT[1]",
+      "d_net": "X8645_ZN",
+      "inverted": false,
+      "d1_net": "X1849_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1801",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1801_Q",
+      "d_net": "X8647_ZN",
+      "inverted": false,
+      "d1_net": "X1805_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1802",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1802_Q",
+      "d_net": "X452_73_ZN",
+      "inverted": false,
+      "d1_net": "X1797_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1803",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1803_Q",
+      "d_net": "X8655_ZN",
+      "inverted": false,
+      "d1_net": "X1802_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1804",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1804_Q",
+      "d_net": "X634_207_ZN",
+      "inverted": false,
+      "d1_net": "X1803_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1805",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1026_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1805_Q",
+      "d_net": "X431_73_ZN",
+      "inverted": false,
+      "d1_net": "X1806_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1806",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1026_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1806_Q",
+      "d_net": "X8648_ZN",
+      "inverted": false,
+      "d1_net": "DT[0]",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X1849",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X1849_Q",
+      "d_net": "X8640_ZN",
+      "inverted": false,
+      "d1_net": "X1801_Q",
+      "s_net": "X8710_Z"
+    },
+    {
+      "inst": "X351_44",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X351_44_Q",
+      "d_net": "X422_73_ZN",
+      "inverted": false,
+      "d1_net": "X63_1886_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X430_309",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X430_309_Q",
+      "d_net": "X632_207_ZN",
+      "inverted": false,
+      "d1_net": "X1712_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X57_10",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X57_10_Q",
+      "d_net": "X8641_ZN",
+      "inverted": false,
+      "d1_net": "X1795_Q",
+      "s_net": "X412_46_Z"
+    },
+    {
+      "inst": "X63_1886",
+      "cell_type": "SC_MFC_140_80",
+      "clk": "X1027_138_ZN",
+      "rst": "X3_323_Z",
+      "q_net": "X63_1886_Q",
+      "d_net": "X3385_ZN",
+      "inverted": false,
+      "d1_net": "X57_10_Q",
+      "s_net": "X412_46_Z"
+    }
+  ],
+  "cones": [
+    {
+      "q_net": "X0_1625_Q",
+      "fanin_nets": [
+        "X0_1626_Q",
+        "X1026_138_ZN",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X467_73_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X0_1626_Q",
+      "fanin_nets": [
+        "X1026_138_ZN",
+        "X1804_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X409_73_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X0_1715_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1713_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X633_207_ZN"
+      ]
+    },
+    {
+      "q_net": "MI1_QT[0]",
+      "fanin_nets": [
+        "X0_1625_Q",
+        "X1026_138_ZN",
+        "X1027_138_ZN",
+        "X1676_Z",
+        "X1849_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X421_73_ZN",
+        "X8645_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1712_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X19_GS",
+        "X19_VS",
+        "X351_44_Q",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X649_290_ZN"
+      ]
+    },
+    {
+      "q_net": "X1713_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X430_309_Q",
+        "X8646_ZN"
+      ]
+    },
+    {
+      "q_net": "X1795_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1676_Z",
+        "X1798_Q",
+        "X19_GS",
+        "X19_VS",
+        "X412_46_Z",
+        "X8644_ZN"
+      ]
+    },
+    {
+      "q_net": "X1796_Q",
+      "fanin_nets": [
+        "X0_1715_Q",
+        "X1027_138_ZN",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X432_73_ZN"
+      ]
+    },
+    {
+      "q_net": "X1797_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1796_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X624_185_ZN"
+      ]
+    },
+    {
+      "q_net": "X1798_Q",
+      "fanin_nets": [
+        "DT[1]",
+        "X1027_138_ZN",
+        "X1676_Z",
+        "X19_GS",
+        "X19_VS",
+        "X412_46_Z",
+        "X461_73_ZN"
+      ]
+    },
+    {
+      "q_net": "MI1_QT[1]",
+      "fanin_nets": [
+        "X0_1625_Q",
+        "X1026_138_ZN",
+        "X1027_138_ZN",
+        "X1676_Z",
+        "X1849_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X421_73_ZN",
+        "X8645_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1801_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1805_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X8647_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1802_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1797_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X452_73_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1803_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1802_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X8655_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1804_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1803_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X634_207_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1805_Q",
+      "fanin_nets": [
+        "X1026_138_ZN",
+        "X1806_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X431_73_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1806_Q",
+      "fanin_nets": [
+        "DT[0]",
+        "X1026_138_ZN",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X8648_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X1849_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1801_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X8640_ZN",
+        "X8710_Z"
+      ]
+    },
+    {
+      "q_net": "X351_44_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X422_73_ZN",
+        "X63_1886_Q"
+      ]
+    },
+    {
+      "q_net": "X430_309_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1712_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X632_207_ZN"
+      ]
+    },
+    {
+      "q_net": "X57_10_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X1795_Q",
+        "X19_GS",
+        "X19_VS",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X8641_ZN"
+      ]
+    },
+    {
+      "q_net": "X63_1886_Q",
+      "fanin_nets": [
+        "X1027_138_ZN",
+        "X19_GS",
+        "X19_VS",
+        "X3385_ZN",
+        "X3_323_Z",
+        "X412_46_Z",
+        "X57_10_Q"
+      ]
+    }
+  ]
+}

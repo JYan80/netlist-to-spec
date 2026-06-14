@@ -1,0 +1,30 @@
+read_verilog SC_LIB_SCH.v
+read_verilog impl.v
+read_verilog spec.v
+
+# Prep implementation
+prep -top COUNT_6B_2
+flatten
+async2sync
+design -save impl
+
+# Prep specification
+design -reset
+read_verilog SC_LIB_SCH.v
+read_verilog impl.v
+read_verilog spec.v
+prep -top COUNT_6B_2_spec
+flatten
+async2sync
+design -save spec
+
+# Bring them together
+design -reset
+design -copy-from impl -as gate COUNT_6B_2
+design -copy-from spec -as gold COUNT_6B_2_spec
+
+equiv_make gold gate equiv
+hierarchy -top equiv
+equiv_simple
+equiv_induct
+equiv_status -assert

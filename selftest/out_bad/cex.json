@@ -1,0 +1,22 @@
+{
+  "failing": [
+    {
+      "signal": "q",
+      "bit": 0,
+      "cycle": 0,
+      "gate": "0010",
+      "gold": "0000"
+    }
+  ],
+  "input_trace": [
+    {
+      "time": 0,
+      "values": {
+        "gate_q": "0010",
+        "gold_q": "0000"
+      }
+    }
+  ],
+  "total_signals": 2,
+  "total_timesteps": 1
+}
