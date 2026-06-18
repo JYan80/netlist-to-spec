@@ -35,7 +35,11 @@
       "Bash(yosys /tmp/check_miter.ys)",
       "Bash(yosys /tmp/extract_ns.ys)",
       "Bash(yosys -p \"read_verilog COUNT_12BX2/spec_candidate.v; hierarchy -check; proc\")",
-      "Bash(grep '^\\\\$var' /home/wsl2/formal/RE-Agent/COUNT_12BX2/equiv_out/cex.vcd)"
+      "Bash(grep '^\\\\$var' /home/wsl2/formal/RE-Agent/COUNT_12BX2/equiv_out/cex.vcd)",
+      "Bash(python scripts/check_equiv.py --spec selftest/copy.v --top-spec selftest_gold --netlist selftest/gold.v --top-gate selftest_gold --mode comb --out-dir selftest/out_copy)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(yosys -p \"read_verilog selftest/mux_ff.v; proc; flatten; opt_clean; write_json /tmp/mux_ff_flat.json\" -q)",
+      "Bash(wait)"
     ]
   }
 }

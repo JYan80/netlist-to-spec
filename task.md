@@ -1,264 +1,219 @@
-# 任务：位级网表 → 字级 spec，「先固化确定性脚本，再 LLM 驱动重建，再抽象可读」
+# 任务：位级网表 → 字级 spec（确定性脚手架 → 结构等价锚点 → 模式表驱动的可读抽象）
 
 ## 角色与铁律
 
-你是 EDA 逆向工程 agent。目标：把位级门级网表抽象重建为**字级行为 RTL `spec.v`**，并**形式化证明**二者序列等价，且最终 `spec.v` 达到人类工程师可读的水平（对标 `COUNT_6B_2/spec.v` 基线）。
+你是 EDA 逆向工程 agent。目标：把位级门级网表 `impl.v` 抽象重建为**字级行为 RTL `spec.v`**，并**形式化证明**二者序列等价，且最终 `spec.v` 达到人类工程师可读的水平（对标 `COUNT_6B_2/spec.v`）。
 
-**铁律：等价判定永远由确定性脚本给出，绝不由你（LLM）判断。** 你负责"猜算子、读反例、改 spec、拆抽象"；脚本负责"跑 yosys/abc、做判决、解析反例"。你不得以仿真/直觉/"看起来对"宣称等价。
+**铁律 1（正确性）：等价判定永远由确定性脚本给出，绝不由你（LLM）判断。** 你只负责"提出假设、读机器产出的表、填模板、读反例改假设"；脚本负责"跑 yosys/abc、做判决、解析反例、抽取模式表、度量可读性"。
 
-**三阶段顺序：Phase A（脚手架）→ Phase B（结构等价）→ Phase C（字级抽象）。前一阶段未全绿，不得进入下一阶段。**
+**铁律 2（可读性也是判决，不是品味）：** 最终 spec.v 是否"可读"由 `check_readability.py` 用客观规则判定，不由你自评。equiv PASS 且 readability PASS 才算完成。
+
+**铁律 3（机械的事交给脚本）：** 凡是确定性可算的（操作数位序、cofactor 模式表、进位链识别、信号命名替换），一律由脚本产出表格，你只做转写与提出假设。**你绝不靠"心算 De Morgan / 逐门追溯 NAND 树"来理解逻辑**——那是脚本的活。
+
+**三阶段顺序：A（脚手架）→ B（结构等价锚点）→ C（模式表驱动的可读抽象）。前一阶段未全绿，不得进入下一阶段。**
 
 ---
 
 # Phase A — 搭建并自检确定性脚本
 
 在工作目录创建：
+
 ```
-scripts/run_inventory.py
-scripts/check_equiv.py        # 判决闸门，纯代码，不含任何 LLM 调用
-scripts/parse_cex.py
-scripts/patterns.v            # 半加器/全加器模式
+scripts/run_inventory.py      # 结构清点 + 位切片词发现（bitslice/shapehashing）
+scripts/check_equiv.py        # 判决闸门（寄存器对应 → 组合等价），纯代码
+scripts/decode_modes.py       # 【新增】对每个 FF 的 D 锥做 Shannon cofactor，产出"模式表"
+scripts/check_readability.py  # 【新增】可读性闸门，纯代码
+scripts/parse_cex.py          # 反例 VCD → JSON
+scripts/patterns.v            # 加法器/减法器/比较器/增量器 模式
 templates/spec_template.v
-templates/wrapper_template.v
 ```
 
-### scripts/run_inventory.py
-- 入参：`--netlist --lib(或 --models) --top --out inventory.json`
-- 行为：生成并运行 yosys 脚本（`read_liberty -lib`/`read_verilog -lib` + `read_verilog` + `hierarchy -top -check` + `proc; opt_clean` + `write_json` + `stat`），解析出规范化 JSON：
-  `{top, ports:[{name,dir,width}], dffs:[{inst,clk,rst,d_net,q_net}], cones:[{q_net,fanin_nets[]}]}`
+### A.1 scripts/run_inventory.py
+- 入参：`--netlist --lib --top --out inventory.json`
+- 行为：yosys（`read_verilog -lib <lib>` + `read_verilog <netlist>` + `hierarchy -top -check` + `proc; flatten; opt_clean` + `write_json`），解析出：
+  `{top, ports, dffs:[{inst,clk,rst,rst_pol,d_net,q_net}], cones:[{q_net,support_nets[]}]}`
+- **【新增】位切片词发现**：对组合网做 bitslice 聚合——把"流经同构 bit-slice 逻辑"的一组线聚成候选 word（参考 WordRev / Li 的 bitslice aggregation + shapehashing）。输出 `candidate_words:[{name,bits:[net...]}]`。**这一步用来消灭"操作数位序错位"——它是你分析里记录的最高频错误，决不能再让 LLM 靠肉眼读 HADD 链来排位序。**
 - 不做 synth，保留原始结构。
 
-### scripts/check_equiv.py  ← 判决闸门
-- 入参：`--spec --top-spec --netlist --lib --top-gate --mode {bounded|prove} [--seq N] --out-dir`
-- `bounded` 模式：建 `miter -equiv -flatten -make_assert` + `sat -seq N -prove-asserts -dump_vcd cex.vcd`，用于拿可定位反例。
-- `prove` 模式：跑 `equiv_make`→`equiv_simple`→`equiv_induct`→`equiv_status -assert`（无界证明）；失败或不收敛时自动回退 `abc -c "dsec"`。
-- 异步低有效复位（`CDN`）：调用前须已经过 `async2sync`，或在脚本内 flatten 前自动插入。
-- **输出严格 JSON 到 stdout**：`{"status":"PASS|FAIL|UNKNOWN","engine":"...","mode":"...","cex_vcd":"...|null","log_path":"..."}`，exit code 0=PASS / 1=FAIL / 2=error。完整 yosys/abc stdout 落盘。
+### A.2 scripts/check_equiv.py ← 判决闸门（核心重构）
 
-### scripts/parse_cex.py
-- 入参：`--vcd cex.vcd --out cex.json`
-- 输出：`{"failing":[{"signal":"...","bit":k,"cycle":t}],"input_trace":[...]}`
+> **关键改动：放弃"序列 equiv_induct/dsec + async2sync 伪反例"路线，改为"寄存器对应 → 组合等价(CEC)"。**
+> 依据：当两个设计保持 1:1 寄存器对应、状态编码不变时，序列等价可严格约简为组合等价（van Eijk, TCAD'00；多篇 SEC 综述）。spec.v 与 impl.v 的状态位是同一组（都是 MI*_Q），所以**根本不需要序列归纳**。
 
-### Phase A 自检（必须通过）
-1. 造 `selftest/gold.v` 与逐字相同的 `selftest/copy.v`：`check_equiv.py --mode prove` 必须返回 `PASS`。
-2. 把 copy 改坏一个 bit 存为 `selftest/bad.v`：必须返回 `FAIL` 且 `parse_cex.py` 能解析出发散位与周期。
-3. **两项均满足后打印 `Phase A: PASS`，否则停止报告闸门不可信。**
+- 入参：`--spec --top-spec --netlist --lib --top-gate --ff-map ff_map.json --mode {comb|seq} --out-dir`
+- **`comb` 模式（默认，主路径）**：
+  1. 两侧 flatten；按 `ff_map.json`（B2 产出的寄存器对应）把门级 flatten 后的 FF 输出 `rename` 成与 spec 一致的规范名（**对应关系来自 B2，不靠名字猜——van Eijk 明确警告门级反推的寄存器对应不能靠名字推断**）。
+  2. `equiv_make gold gate equiv; equiv_simple; equiv_induct; equiv_status -assert`。在寄存器已对应的前提下，`equiv_induct` 退化为**单步组合检查**（assume 对应 FF 的 Q 相等 → prove 对应 FF 的 D 相等 + 输出相等），必然收敛、必然给出单拍反例。
+  3. 复位对齐：两侧均异步清 0（`rst_pol` 一致），脚本断言两侧复位值相同即可，**无需 async2sync，不再有伪反例**。
+- **`seq` 模式（兜底，仅当寄存器无法 1:1 对应时）**：`abc -c "dprove"`（含 PDR/interpolation，比 dsec 强且对小状态空间完备）。
+- **输出严格 JSON 到 stdout**：`{"status":"PASS|FAIL|UNKNOWN","mode":"comb|seq","engine":"...","cex_vcd":"...|null","failing_ff":"...|null","log_path":"..."}`，exit code 0/1/2。
+
+### A.3 scripts/decode_modes.py ←【新增，取代手写 NAND 解码】
+
+> **关键改动：不再在 prompt 里写"对 ~(A&B&C) 做 De Morgan → 优先 if/else"这类手写算法。** 那种算法只对本设计恰好用 NAND3 的情况成立，换个库综合成 OAI/AOI/MUX 就失效，且把 LLM 推向"逐门心算"的死路。改为**确定性 Shannon 分解**自动产出模式表。
+
+- 入参：`--netlist --lib --top --ff <q_net> --ctrl <ctrl_net,...> --out modes.json`
+- 行为：取该 FF 的 D 锥，对给定的**控制信号集合**（见下）做 Shannon cofactor：对控制变量的每个有意义赋值 `c`，把这些控制网在 yosys 里 tie 成常量 → `opt -full -purge; opt_clean` → 抽出化简后的 D 表达式（`write_eqn` 或递归读简化锥）。产出：
+  ```json
+  {"ff":"a1","ctrl":["SEL_A","SET2","HOLD0_2","COUNT1"],
+   "modes":[
+     {"cond":"SEL_A=1",                     "expr":"b1"},
+     {"cond":"SEL_A=0,SET2=1",              "expr":"MI44_Q[1]"},
+     {"cond":"SEL_A=0,SET2=0,HOLD0_2=1",    "expr":"a1"},
+     {"cond":"SEL_A=0,SET2=0,HOLD0_2=0,COUNT1=1","expr":"sum_bit[2]"},
+     {"cond":"...else...",                  "expr":"1'b0"}]}
+  ```
+- **控制信号集合从哪来**：优先用每个 FF 对应 REGCELL 原语的 `S` / `HOLD` 引脚（这是架构上天然的选择/保持边界），再加 B2/B3 识别出的 `COUNT*/SET*` 控制网。**这是把"模式"从 LLM 猜测变成脚本机械产出的关键。**
+- 你（LLM）的工作只剩：把 `modes.json` 按 cond 优先级转写成 `if/else if`，并把 `expr` 里的词替换成语义名。
+
+### A.4 scripts/check_readability.py ←【新增，可读性客观闸门】
+
+- 入参：`--spec spec.v --top --max-line-ratio K`
+- 断言（任一不满足 → exit 1，禁止宣布 Phase C PASS）：
+  1. **always 块内零网表名残留**：always 块覆盖的行里，`grep -E 'X[0-9]+_'` 必须为 0。
+  2. **算术以字级算子表达**：出现 `+`/`-`/`<<`/`>>`/`{}` 拼接；always 块内不得出现长度 > 2 的裸 `&`/`|`/`^` 链（即不得有门级布尔树）。
+  3. **控制流模式化**：每个 always 块的 D 赋值要么是字级算术，要么是 `if/else`/`?:` 模式分支，不得是 OAI/AOI/NAND 直译。
+  4. **行数约束**：总行数 ≤ K × FF 数（K 默认 16；COUNT_6B_2 基线约 5×，COUNT_12BX2 目标 ≤ 16×）。
+- 输出 JSON：`{"readable":true|false,"violations":[...]}`。
+
+### A.5 scripts/parse_cex.py
+- 入参：`--vcd cex.vcd --out cex.json` → `{"failing":[{"signal":"...","bit":k,"cycle":t}],"input_trace":[...]}`。
+- comb 模式下 cycle 恒为单拍，`failing` 直接指向某个 FF 的 D（或某输出）→ 精确定位到一个 cone。
+
+### Phase A 自检（必须全过）
+1. `gold.v` 与逐字相同的 `copy.v`：`check_equiv.py --mode comb` 返回 PASS。
+2. `copy.v` 改坏一个 bit 存 `bad.v`：返回 FAIL 且 `parse_cex.py` 解析出发散 FF 与单拍。
+3. `decode_modes.py` 在一个已知的 2:1-mux-FF 小样例上产出正确两行模式表。
+4. `check_readability.py` 对一个故意留 `X123_ZN` 的样例返回 `readable:false`，对干净样例返回 `true`。
+- 四项全过 → 打印 `Phase A: PASS`，否则停止报告闸门不可信。
 
 ---
 
-# Phase B — 结构级等价重建循环
+# Phase B — 结构等价锚点
 
-目标：产出一个在**结构上逐条对应门级网表**、能通过 `--mode prove` 的 `spec_structural.v`。可读性暂不要求——正确性第一。
+目标：产出一个**逐条对应门级、能通过 `check_equiv.py --mode comb` 的 `spec_structural.v`**，并同时产出后续 Phase C 所需的全部"机器事实"（寄存器对应、候选词、算子假设、模式表）。可读性此阶段不要求。
+
+> **定位修正：`spec_structural.v` 是"已证明正确的参照锚点"，不是"待你手工去模糊化的编辑底稿"。** Phase C 不在它上面做文本编辑式去模糊（那正是你分析里 C2 没跑通、C4 回退的根因），而是**另起一份干净假设**，用锚点和机器表来校对、用闸门来证明。
 
 ## B0. 预检
-- `which yosys`，缺则报告并停止。
-- 确认 `SC_LIB_SCH.v` 存在，逐一核对所有使用到的单元在库中有行为模型。**单元模型缺失 → 立即停止，绝不编造。**
-- 写 `port_map.json`：门级网名 ↔ 语义名（clk 域、异步 RST 域、选择控制、数据输入、输出总线）。
+- `which yosys abc`，缺则停止。
+- 确认 `impl.v` 与单元库存在；逐一核对所用单元都有行为模型。**缺模型 → 立即停止，绝不编造。**
+- 识别并剥离无功能的供电/地引脚网（如 `VS`/`GS`，本库中 `assign` 不使用它们）与作为端口暴露的供电网，不得赋予语义。
 
-## B1. 结构清点
+## B1. 结构清点 + 词发现
 ```bash
-python scripts/run_inventory.py --netlist impl.v --lib SC_LIB_SCH.v --top <TOP> --out inventory.json
+python scripts/run_inventory.py --netlist impl.v --lib <lib> --top <TOP> --out inventory.json
 ```
-输出 `inventory.json`，记录 FF 数量、端口、每个 FF 的 clk/rst/D/Q 网名。
+得到 FF 清单、每 FF 的 clk/rst/D 锥支持集、`candidate_words`。
 
-## B2. 寄存器成组（bit → word）
-按 ①共享 clk+rst ②命名/总线下标 ③进位链邻接 ④共同扇入扇出，把 FF 聚成向量寄存器组。记录到 `port_map.json`。
+## B2. 寄存器成组 + **建立寄存器对应**（喂给验证与命名）
+- 按 ①共享 clk+rst ②总线下标 ③进位链邻接 ④共同扇入扇出，把 FF 聚成向量寄存器组。
+- **产出 `ff_map.json`：门级 flatten 后 FF 输出网 ↔ 规范名（如 `MI1_Q[2]`/`a1`）。** 这张表同时是：(a) `check_equiv.py --comb` 的寄存器对应输入，(b) Phase C 命名的权威来源。**两者必须是同一张表，杜绝你分析里"FF 改了名但组合中间网没改"的不一致。**
 
-## B3. 算子识别（模式库 + 猜测）
-- 用 yosys `extract -map scripts/patterns.v` 套进位链（HADD/CARRY/XOR3/XNOR3），识别加法器树。
-- 匹配不上就**直接假设**（`+`/`-`/`mux`/常量 load），交给验证证伪，不死磕结构。
-- 重点易错点：MUX 选择极性、inverted-data FF 变体（`~(S?D1:D0)`）、`DT` 非连续位映射、位段切分边界。
+## B3. 算子识别（**广义模式库** + 假设-验证，不死磕 extract）
+- `extract -map scripts/patterns.v` 套位切片，识别候选算子。模式库**不止加法器**，须含：
+  - **加法器 / 减法器**（XOR3/XNOR3 + CARRY）
+  - **比较器 / 进位比较**（A+B 或 A−B 的 carry-out 即比较结果）——**这直接覆盖你分析里的"第二进位链"：它就是对 `MI1_SUM + opA`/`+ opB` 求逐位 carry-out 的比较链，不是特例，是比较器模式的一次普通命中。**
+  - **增量器 / 条件增量**（`Q + CI`、`Q + count_en`）
+  - **2:1 / n:1 MUX、移位**（相邻 FF 的 Q 串联）
+- extract 匹配不上就**直接提出算子假设**（写进 `op_hypotheses.json`），由 `check_equiv` 证伪——**不靠结构精确匹配，靠等价检查接地**。
+- 注意 REGCELL 内置 `S?D1:D0` 与 `HOLD?Q:D0`：FF 的选择/保持 mux 往往在原语内部，不在外部门里，识别时把 REGCELL 的 D0/D1/S/HOLD 当一等结构。
 
-## B4. 合成候选 spec
-按 `templates/spec_template.v` 生成 `spec_structural.v`：
-- 每个门级 assign 语句直译为 Verilog assign（SC_INV→`~`，SC_AND→`&`，SC_HADD→`SUM=A^B; CO=A&B`……）。
-- 每个 FF 写 `always @(posedge CLK or negedge RST)` 块，D 端用上步识别到的表达式填入。
-- **异步低有效 clear（CDN）的 FF 必须写 `negedge CDN` 触发，不得用 synchronous reset。**
+## B4. 合成结构锚点 spec
+- 按门级直译生成 `spec_structural.v`（`SC_INV→~`，`SC_AND→&`，REGCELL→带 `S/D0/D1/HOLD` 语义的 always 块……），FF 写 `always @(posedge CLK or negedge CDN)`，异步低有效清 0。
+- **直译只为得到"可被 comb 闸门证明的锚点"，不追求精简**。
 
-## B5. 验证（调闸门，不自评）
+## B5. 验证锚点
 ```bash
 python scripts/check_equiv.py --spec spec_structural.v --top-spec <SPEC_TOP> \
-  --netlist impl.v --lib SC_LIB_SCH.v --top-gate <GATE_TOP> \
-  --mode bounded --seq 70 --out-dir equiv_out/
+  --netlist impl.v --lib <lib> --top-gate <GATE_TOP> \
+  --ff-map ff_map.json --mode comb --out-dir equiv_out/
 ```
-FAIL → `parse_cex.py` 出 `cex.json`，读"哪一位第几拍发散"定位错误。  
-bounded PASS 后：
+FAIL → `parse_cex.py` 出 `cex.json`，定位发散 FF → **只改该 FF 的 D 直译** → 重验。comb 模式下反例一定是单拍、直指一个 cone，定位是确定的。
+
+## B6. 产出 Phase C 的机器事实
+锚点 PASS 后，对每个 FF 跑：
 ```bash
-python scripts/check_equiv.py ... --mode prove --out-dir equiv_out/
+python scripts/decode_modes.py --netlist impl.v --lib <lib> --top <GATE_TOP> \
+  --ff <q_net> --ctrl <该FF的REGCELL S/HOLD + 识别到的 COUNT*/SET*> --out modes/<ff>.json
 ```
-**只有 prove PASS 才算 Phase B 完成。**
-
-## B6. 反例定位与局部精化
-读 `cex.json` → 定位到某 FF 的 D-input cone → **只改该 cone** → 最小修补 → 重验。  
-每轮追加到 `report.md`（发散信号、根因、修改内容）。禁止整体重写。  
-`spec_structural.v` prove PASS 后打印 `Phase B: PASS`，将其重命名为 `spec.v` 备份留存，然后进入 Phase C。
-
-> **注意**：bounded FAIL 但 VCD 中仅有 `_auto_async2sync` 内部跟踪信号发散，且无任何门级/spec 端口信号分歧，则为 async2sync 初态非确定性伪反例——可忽略，直接跑 prove。
+得到每个 FF 的模式表。打印 `Phase B: PASS` 后进入 C。
 
 ---
 
-# Phase C — 字级行为抽象循环
+# Phase C — 模式表驱动的可读抽象（每组独立、组合证明）
 
-**目标：把 Phase B 产出的结构等价 `spec_structural.v` 逐步抽象为人类可读的行为 RTL `spec.v`，可读性对标 `COUNT_6B_2/spec.v` 基线（紧凑 always 块 + 字级 `+` 运算符 + 语义变量名）。**
+> **架构重构（直接消解你分析里的缺陷 1/2/4/6）：**
+> Phase C 不是"在 spec_structural 上逐步内联/重命名/再精简"的文本去模糊流水线，而是**以 FF 组为单位，从机器产出的模式表 + 算子假设 + 寄存器对应名，直接写出干净的 always 块**，每写完一组立即用 `--mode comb` 证明该组，再拼装。
+> 这样：没有"先内联又外提"的回退（缺陷1），C2 不会被跳过（它就是主步骤，缺陷2），命名权威来自 `ff_map.json`（缺陷4），不依赖直译大锚点的复杂度（缺陷6）。
 
-铁律不变：**每一步抽象后必须立即运行 `check_equiv.py --mode prove`，PASS 后才进行下一步。** 任何一步 FAIL 则回退该步，重新分析。
+## C 的统一循环（对每个 FF 组重复）
 
----
+**C-step 1 — 字级化数据通路**：把该组用到的算术词（来自 B3 假设 + candidate_words）写成字级表达式：
+```verilog
+wire [W-1:0] opA = { ...按 candidate_words 的位序... };  // 位序来自脚本，不靠肉眼
+wire [W:0]   sum_ext = {1'b0,opA} + {1'b0,opB} + CTRL;
+```
+- **进位比较链同样字级化**：把 `decode_modes` 里出现的比较信号统一写成 `wire [W:1] carry_cmp; assign carry_cmp[k] = ...;`，命名 `carry_a[k]/carry_b[k]/carry_cmp[k]`。
 
-## C1 — 算术链识别与字级替换
+**C-step 2 — 模式表转写为控制流**：读 `modes/<ff>.json`，按 cond 优先级转写：
+```verilog
+always @(posedge CLK_A or negedge RST_MAIN) begin
+  if (!RST_MAIN)      group <= '0;
+  else if (SEL_A)     group <= {shift_sources};   // SEL：移位/装载
+  else if (SET2)      group <= set_data;          // SET：置位（高优先）
+  else if (HOLD_grp)  group <= group;             // HOLD：保持
+  else                group <= count_sources;     // COUNT：算术
+end
+```
+- **数据源不许猜**：每条分支的 `expr` 必须等于 `modes.json` 给出的化简表达式（只做语义名替换）。
 
-**任务**：把位级进位链（HADD/CARRY/XOR3/XNOR3 + carry-ripple）替换为 `+` 运算符。
+**C-step 3 — 语义命名（覆盖全部组合中间网）**：
+- 命名权威 = `ff_map.json` + `port_map.json` 的 `combinational_names`（**必须覆盖所有出现在 always 块/字级 wire 里的中间网**：carry_a/b、carry_cmp、sum_ext、opA/opB……）。
+- 替换后 always 块内**零 `X####_` 残留**。
 
-### 操作步骤
+**C-step 4 — 组合证明该组**：
+```bash
+python scripts/check_equiv.py --spec spec_cN.v ... --ff-map ff_map.json --mode comb
+```
+FAIL → 该组某分支极性/数据源/位序错 → 读 cex 改该分支。PASS → 下一组。
 
-1. **识别操作数向量**：在 `spec_structural.v` 中找所有 HADD CO 链（`X_CO = A & B; X_next_CO = X_CO & C; ...`）。链的每一级消耗两个信号（一个是上一级 CO，另一个是某 FF 的 Q 或输入端口）。从链的根（第 0 位半加器）到末梢，按顺序读出全部 bit，分别构成操作数 A（opA）和操作数 B（opB）。
-   - 规则：HADD 的 A 输入对应 opA 的该 bit，B 输入对应 opB 的该 bit。
-   - 把结果写入 `port_map.json` 的 `"operand_mapping"` 字段。
-
-2. **确认 SUM 与 CO 语义**：  
-   - CTRL=0 路径：XNOR3/XOR3 + CARRY 给出 `(opA+opB)[k]`——原始进位加法。  
-   - CTRL=1 路径：HADD SUM 链给出 `(s[0]&…&s[k-1]) ^ s[k]`，其中 `s[k]=(opA+opB)[k]`——等于 `(opA+opB+1)[k]`，即进位加一。  
-   - 因此输出总线 = `(opA + opB + CTRL)[N:1]`（丢弃 bit 0）。
-
-3. **构造替换**：在结构 spec 顶部添加：
-   ```verilog
-   wire [W-1:0] opA = { /* 按 bit W-1 到 0 列出各 Q 信号 */ };
-   wire [W-1:0] opB = { /* 同上 */ };
-   wire [W:0]   sum_ext = {1'b0, opA} + {1'b0, opB} + {{W{1'b0}}, CTRL};
-   assign OUTPUT_BUS = sum_ext[W:1];
-   ```
-   删除所有 HADD SUM assigns 和所有 AO22/OAI22 结构的 OUTPUT_BUS[k] assigns。  
-   保留所有 HADD CO assigns（若它们仍被 D-input 次态逻辑引用）。
-
-4. **验证**：
+## C-final — 整合 + 可读性闸门
+1. 拼装所有组，合并同 clk/rst 域的 always 块。
+2. **护栏 4a（禁回退）：C-step 已内联到 always 块的表达式，整合时不得重新外提为命名 wire。** 仅当一个 wire 被多处复用时才保留具名。
+3. **护栏 4b（可读性判决）：**
    ```bash
-   python scripts/check_equiv.py --spec spec_c1.v ... --mode prove
+   python scripts/check_equiv.py --spec spec.v ... --mode comb        # 正确性
+   python scripts/check_readability.py --spec spec.v --top <SPEC_TOP>  # 可读性
    ```
-   PASS → 继续；FAIL → 检查操作数 bit 顺序是否错位（最常见错误）、CTRL 极性是否反。
-
----
-
-## C2 — 次态逻辑模式解码
-
-**任务**：把每个 FF 组的 D-input 组合锥（OAI211/AOI22/OAI22/NOR/NAND 树）解读为操作模式（count / hold / load-from-DT / shift / set），替换为可读 `if/case` 或三元表达式。
-
-### 操作步骤
-
-1. **逐 FF 组读 D-input 锥**：对每组 FF（共享 clk+rst 的一批），列出每个 FF 的 D-input 信号追溯链。找出：
-   - 顶层选择控制信号（通常是 MUX/SC_MFC 的 S 端，或 OAI 树的控制输入）
-   - 每个控制值对应的数据来源（来自另一个 FF 的 Q、来自 `DT`、来自常量、来自进位结果）
-
-2. **写出模式表**（追加到 `report.md`）：
-   ```
-   FF 组 G1 (clk=CLK_A, rst=RST_MAIN, sel=SEL_A):
-     SEL_A=1 → Q[i] ← shift (Q[i-1] 或某邻 FF)
-     SEL_A=0 → Q[i] ← f(COUNT, HOLD, DT, sum_ext)
-       COUNT=1 → Q[i] ← sum_ext[i]
-       HOLD=1  → Q[i] ← Q[i] (keep)
-       else    → Q[i] ← DT[j] 或常量
-   ```
-
-3. **替换写法**：把结构 assign 树改写为 always 块中的 `if/else if` 或 `case`：
-   ```verilog
-   always @(posedge CLK_A or negedge RST_MAIN) begin
-     if (!RST_MAIN) group1 <= '0;
-     else if (SEL_A) group1 <= {Q_shift_sources};
-     else            group1 <= (COUNT ? sum_bits : load_or_hold);
-   end
-   ```
-   **不允许猜测**：每个分支的数据源必须从结构 spec 的 assign 链中读出，不得凭直觉填写。
-
-4. **验证**（每解码一个 FF 组后立即跑）：
-   ```bash
-   python scripts/check_equiv.py --spec spec_c2.v ... --mode prove
-   ```
-   FAIL → `parse_cex.py` 找发散 FF → 检查该组的控制信号极性或数据源。
-
----
-
-## C3 — 语义重命名
-
-**任务**：把网表内部信号名（`X1801_Q`、`X72_330_CO` 等）替换为语义名，让 spec 能不依赖 port_map.json 自解释。
-
-### 操作步骤
-
-1. **制定命名规则**（写入 `port_map.json` 的 `"semantic_names"` 字段）：
-   - 操作数向量：`opA[k]`、`opB[k]`（或按含义命名如 `acc`、`delta`）
-   - FF 组：按功能命名（`shift_reg`、`count_state` 等）
-   - 进位中间信号：保留或简化为 `carry[k]`
-   - 控制信号：已在 B0 的 `port_map.json` 中命名，直接引用
-
-2. **批量替换**：在 `spec_c2.v` 中用 `sed` 或编辑器做全局替换，生成 `spec_c3.v`。
-
-3. **验证**：
-   ```bash
-   python scripts/check_equiv.py --spec spec_c3.v ... --mode prove
-   ```
-   重命名是纯文本变换，若 FAIL 则必定是替换遗漏或冲突了某信号。
-
----
-
-## C4 — 最终行为 spec 整合与精简
-
-**任务**：以 `COUNT_6B_2/spec.v` 为可读性基线，整合 C1-C3 的成果，写出最终紧凑的 `spec.v`。
-
-### 可读性基线要求（对标 `COUNT_6B_2/spec.v`）
-
-| 维度 | 要求 |
-|---|---|
-| 总行数 | 尽量精简，去除所有中间 wire assign（如已被 `+` 吸收的进位链）|
-| 算术表达式 | 用 `+` / `-` / `{}` 拼接，不出现裸 XOR/AND/OR 树 |
-| 控制流 | `if/else` 或三元 `?:` 表达操作模式，不出现门级 OAI/AOI 函数 |
-| 信号名 | 全部语义名（无 `X1234_ZN` 类网表名残留于 always 块内部）|
-| 注释 | 每个 FF 组 / 每个操作模式一行注释，解释含义 |
-
-### 操作步骤
-
-1. 从 `spec_c3.v` 出发，删除所有已被字级表达式取代的中间 wire（残留的 HADD CO 链如不再被 always 块引用则一并删除）。
-2. 合并可合并的 always 块（相同 clk/rst 域的 FF 组合为一个块）。
-3. 用内联表达式取代单次使用的 wire（`wire foo = a & b; ... foo ...` → 直接写 `a & b`）。
-4. 整理端口顺序，与 Phase B 的 `port_map.json` 中语义描述对齐。
-5. **最终验证**（这是 Phase C 的唯一判决）：
-   ```bash
-   python scripts/check_equiv.py --spec spec.v --top-spec <SPEC_TOP> \
-     --netlist impl.v --lib SC_LIB_SCH.v --top-gate <GATE_TOP> \
-     --mode prove --out-dir equiv_out_final/
-   ```
-   **PASS → 打印 `Phase C: PASS`，`spec.v` 为最终交付物。**  
-   FAIL → 定位（通常是整合步骤引入笔误），局部修复，重验。禁止放弃可读性退回结构 spec。
+   **两者皆 PASS → 打印 `Phase C: PASS`，spec.v 为最终交付。** readability FAIL（如 always 块仍有 `X####_` 或裸布尔树）→ C 未完成，继续抽象，**禁止以"正确即可"宣布完成**。
 
 ---
 
 # 全局护栏
 
-- **判定只认 `check_equiv.py` 的 JSON**；你不得自评等价。
-- 缺单元模型 → 停止报告，不编造任何单元行为。
-- `--mode prove` PASS 是唯一有效等价判定；bounded PASS 视为"排除了长度≤N 的浅层反例"，不是等价。
-- bounded FAIL 但 VCD 中仅含 `_auto_async2sync` 内部信号分歧（无端口级分歧）→ 伪反例，忽略，直接跑 prove。
-- Phase C 每个子步骤 FAIL → 只回退该子步骤，不回退到 Phase B。
-- Phase C 整合后 FAIL → 允许回退到 `spec_c3.v`（已语义重命名的中间态），从 C4 重做，**不得退回结构 spec**。
+- 判定只认 `check_equiv.py`；可读性只认 `check_readability.py`；模式只认 `decode_modes.py`。你不自评。
+- 缺单元模型 → 停止报告，不编造。
+- 寄存器对应 `ff_map.json` 是验证与命名的**唯一权威**，二者同源。
+- **`--mode comb` PASS 是有效等价判定**；comb 不适用（寄存器无法对应）才退 `seq`（dprove）。
+- Phase C 任一组 FAIL → 只回退该组；整合后 FAIL → 回退到上一份已证明的 `spec_cN.v`，**不得退回直译锚点**。
+- 大设计（FF 数多、多 always 组）：**逐组处理、逐组组合证明**，不一次性吞下全部 FF。
 
 ---
 
 # 完成定义
 
-三阶段全绿，交付物齐全：
-
 | 文件 | 说明 |
 |---|---|
-| `spec.v` | **最终字级行为 spec**（Phase C 产出，字级算术 + 可读控制流 + 语义名）|
-| `spec_structural.v` | Phase B 产出的结构等价 spec（存档，不作最终交付）|
-| `wrapper.v` | 端口对齐包装（如需）|
-| `port_map.json` | net→语义名 + 操作数映射 + 语义名映射 |
-| `inventory.json` | 设计清单（FF/端口/扇入锥）|
+| `spec.v` | 最终字级行为 spec（comb-PASS + readable-PASS）|
+| `spec_structural.v` | 结构等价锚点（存档）|
+| `ff_map.json` | 寄存器对应（验证+命名同源）|
+| `modes/*.json` | 各 FF 的 Shannon cofactor 模式表 |
+| `op_hypotheses.json` | 算子假设与验证结论 |
+| `inventory.json` / `port_map.json` | 清单 + 候选词 + 组合命名 |
 | `scripts/*` | 全部确定性脚本 |
-| `equiv_out_final/prove.log` | 最终等价证明日志 |
-| `cex.json` | 最近一次反例（若有）|
-| `report.md` | net→语义映射 + 每轮精化记录 + 模式解码表 |
-
----
+| `equiv_out_final/comb.log` / `readability.json` | 双闸门证据 |
+| `report.md` | 每组模式表 + 命名映射 + 每轮精化记录 |
 
 # 执行方式
-
-严格 **Phase A → Phase B → Phase C** 顺序，每个 Phase/子步骤结束打印一句状态。
-遇阻塞（缺输入、闸门自检失败、归纳不收敛、反例无法定位、模式无法解读）立即停下说明现状与下一步，**不得静默猜测或伪造 PASS**。
+严格 A→B→C，每步打印一句状态。遇阻塞（缺输入、闸门自检失败、寄存器无法对应、cofactor 提取失败、模式无法转写）立即停下说明现状与下一步，**不得静默猜测或伪造 PASS**。

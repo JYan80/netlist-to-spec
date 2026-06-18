@@ -166,6 +166,46 @@ def compute_cones(module_data, bit_map, dffs):
     return cones
 
 
+def discover_words(dffs):
+    """
+    Bitslice / shapehashing word discovery (simplified):
+    Group FFs that share the same (clk, rst, s_net) triple — these are
+    candidates for bit-slices of a word-level register.  Within a group,
+    also look for consecutive bus-index patterns in q_net / d_net names.
+    Returns candidate_words:[{name, bits:[q_net,...]}].
+    """
+    from collections import defaultdict
+    import re
+
+    groups = defaultdict(list)
+    for dff in dffs:
+        key = (dff.get("clk"), dff.get("rst"), dff.get("s_net"))
+        groups[key].append(dff)
+
+    words = []
+    for key, members in groups.items():
+        if len(members) < 2:
+            continue
+        # Try to cluster by bus name: strip trailing [k] or _k suffix
+        bus_groups = defaultdict(list)
+        for dff in members:
+            q = dff.get("q_net", "")
+            # Match patterns like MI1_QT[0], X1801_Q, a0
+            # Strip trailing index: [N], _N, or trailing digit(s)
+            base = re.sub(r'\[\d+\]$', '', q)  # MI1_QT[0] → MI1_QT
+            base = re.sub(r'_Q$', '', base)     # X1801_Q → X1801
+            base = re.sub(r'\d+$', '', base)    # a10 → a, X1801 → X
+            bus_groups[base].append(dff["q_net"])
+
+        for base, qnets in bus_groups.items():
+            if len(qnets) >= 2 and base:
+                words.append({"name": base or f"word_{key[0]}",
+                               "bits": qnets,
+                               "clk": key[0], "rst": key[1], "sel": key[2]})
+
+    return words
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--netlist", required=True)
@@ -186,15 +226,19 @@ def main():
     dffs = parse_dffs(mod, bit_map)
     cones = compute_cones(mod, bit_map, dffs)
 
+    candidate_words = discover_words(dffs)
+
     result = {
         "top": args.top,
         "ports": ports,
         "dffs": dffs,
         "cones": cones,
+        "candidate_words": candidate_words,
     }
     with open(args.out, "w") as f:
         json.dump(result, f, indent=2)
-    print(f"Inventory written to {args.out}: {len(ports)} ports, {len(dffs)} DFFs, {len(cones)} cones")
+    print(f"Inventory written to {args.out}: {len(ports)} ports, {len(dffs)} DFFs, "
+          f"{len(cones)} cones, {len(candidate_words)} candidate words")
 
 
 if __name__ == "__main__":

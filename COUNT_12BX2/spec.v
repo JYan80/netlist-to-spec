@@ -1,6 +1,4 @@
-// COUNT_12BX2_spec.v — Word-level behavioral RTL spec (Phase C)
-// Semantic registers a0..a10/b0..b10, word-level MI1_SUM, formal proof PASS
-
+// COUNT_12BX2_spec.v  Behavioral RTL spec, formally equivalent to impl.v
 module COUNT_12BX2_spec (
     input  wire        COUNT0,
     input  wire        COUNT1N,
@@ -31,122 +29,6 @@ module COUNT_12BX2_spec (
     output wire [11:1] MI1_SUM
 );
 
-  // Intermediate combinational wires
-  wire X1033_5_ZN;
-  wire X154_21_ZN;
-  // word-level arithmetic wires (Phase C1)
-  wire [10:0] opA = {a10, a9, a8, a7, a6, a5, a4, a3, a2, a1, a0};
-  wire [10:0] opB = {b10, b9, b8, b7, b6, b5, b4, b3, b2, b1, b0};
-  wire [11:0] sum_ext = {1'b0, opA} + {1'b0, opB} + {11'b0, CTRL0};
-  wire [11:0] raw_sum_ext = {1'b0, opA} + {1'b0, opB};
-  wire X1889_ZN;
-  wire X1890_Z;
-  wire X1891_CO;
-  wire X1892_CO;
-  wire X212_6_ZN;
-  wire X214_21_ZN;
-  wire X2492_CO;
-  wire X24_263_CO;
-  wire X2503_Z;
-  wire X2504_Z;
-  wire X2505_Z;
-  wire X2506_Z;
-  wire X27_263_CO;
-  wire X28_263_CO;
-  wire X30_6_ZN;
-  wire X31_263_CO;
-  wire X32_263_CO;
-  wire X3382_Z;
-  wire X3384_Z;
-  wire X33_263_CO;
-  wire X3484_ZN;
-  wire X3510_ZN;
-  wire X36_263_CO;
-  wire X420_ZN;
-  wire X421_Z;
-  wire X47_344_CO;
-  wire X4_6_ZN;
-  wire X568_189_ZN;
-  wire X569_189_ZN;
-  wire X593_189_ZN;
-  wire X59_5_ZN;
-  wire X605_189_ZN;
-  wire X622_5_ZN;
-  wire X623_5_ZN;
-  wire X625_5_ZN;
-  wire X630_103_Z;
-  wire X630_189_ZN;
-  wire X636_64_ZN;
-  wire X661_189_ZN;
-  wire X684_189_ZN;
-  wire X688_189_ZN;
-  wire X703_103_Z;
-  wire X72_6_ZN;
-  wire X744_64_ZN;
-  wire X745_64_ZN;
-  wire X747_5_ZN;
-  wire X748_5_ZN;
-  wire X751_5_ZN;
-  wire X8258_ZN;
-  wire X8259_ZN;
-  wire X8261_ZN;
-  wire X8267_ZN;
-  wire X8269_ZN;
-  wire X8270_ZN;
-  wire X8271_ZN;
-  wire X8274_ZN;
-  wire X8275_ZN;
-  wire X8276_ZN;
-  wire X8277_ZN;
-  wire X8278_ZN;
-  wire X8279_ZN;
-  wire X8280_ZN;
-  wire X8397_ZN;
-  wire X8403_ZN;
-  wire X8405_ZN;
-  wire X8409_ZN;
-  wire X8411_ZN;
-  wire X8418_ZN;
-  wire X8419_ZN;
-  wire X8500_ZN;
-  wire X8510_ZN;
-  wire X8511_ZN;
-  wire X8514_ZN;
-  wire X8515_ZN;
-  wire X8517_ZN;
-  wire X8519_ZN;
-  wire X8522_ZN;
-  wire X8526_ZN;
-  wire X8527_ZN;
-  wire X8531_ZN;
-  wire X8543_ZN;
-  wire X8549_ZN;
-  wire X8557_ZN;
-  wire X8559_ZN;
-  wire X8613_Z;
-  wire X8614_Z;
-  wire X8615_Z;
-  wire X8616_Z;
-  wire X8617_Z;
-  wire X8618_Z;
-  wire X8619_Z;
-  wire X8620_Z;
-  wire X8621_Z;
-  wire X8622_Z;
-  wire X8623_Z;
-  wire X8624_Z;
-  wire X8625_CO;
-  wire X8626_CO;
-  wire X8628_CO;
-  wire X8630_CO;
-  wire X8631_CO;
-  wire X8633_CO;
-  wire X8634_CO;
-  wire X8635_CO;
-  wire X8637_CO;
-  wire X8638_CO;
-  wire X911_5_ZN;
-
   // Clock / reset / select aliases
   wire CLK_A    = X1026_138_ZN;
   wire CLK_B    = X1027_138_ZN;
@@ -155,201 +37,123 @@ module COUNT_12BX2_spec (
   wire SEL_A    = X8710_Z;
   wire SEL_B    = X412_46_Z;
 
-  // Operand accumulator state bits (a=opA operand, b=opB operand, 0=LSB..10=MSB)
-  reg a0,  a1,  a2,  a3,  a4,  a5,  a6,  a7,  a8,  a9,  a10;
-  reg b0,  b1,  b2,  b3,  b4,  b5,  b6,  b7,  b8,  b9,  b10;
+  // State registers (11-bit A accumulator + 11-bit B accumulator)
+  reg a0; reg a1; reg a2; reg a3; reg a4; reg a5;
+  reg a6; reg a7; reg a8; reg a9; reg a10;
+  reg b0; reg b1; reg b2; reg b3; reg b4; reg b5;
+  reg b6; reg b7; reg b8; reg b9; reg b10;
 
-
-  // Combinational logic
   assign MI1_QT[0] = a0;
   assign MI1_QT[1] = b9;
-  assign X4_6_ZN = ~(SET2&MI44_Q[2]);
-  assign MI1_SUM = sum_ext[11:1];
-  assign X24_263_CO = (MI1_SUM[8]&X28_263_CO)|(MI1_SUM[8]&b7)|(X28_263_CO&b7);
-  assign X27_263_CO = (MI1_SUM[2]&X630_103_Z)|(MI1_SUM[2]&a1)|(X630_103_Z&a1);
-  assign X28_263_CO = (MI1_SUM[7]&X32_263_CO)|(MI1_SUM[7]&a6)|(X32_263_CO&a6);
-  assign X30_6_ZN = ~(HOLD1[2]&b1);
-  assign X31_263_CO = (MI1_SUM[8]&X8625_CO)|(MI1_SUM[8]&a7)|(X8625_CO&a7);
-  assign X32_263_CO = (MI1_SUM[6]&X2492_CO)|(MI1_SUM[6]&a5)|(X2492_CO&a5);
-  assign X33_263_CO = (MI1_SUM[11]&X8633_CO)|(MI1_SUM[11]&b10)|(X8633_CO&b10);
-  assign X36_263_CO = (MI1_SUM[6]&X8638_CO)|(MI1_SUM[6]&b5)|(X8638_CO&b5);
-  assign X47_344_CO = (MI1_SUM[10]&X1892_CO)|(MI1_SUM[10]&a9)|(X1892_CO&a9);
-  assign X59_5_ZN = raw_sum_ext[8];
-  assign X72_6_ZN = ~(HOLD1[2]&a3);
-  assign X154_21_ZN = ~((X8616_Z|CTRL1)&(X8619_Z|CTRL2));
-  assign X212_6_ZN = ~(SET1&MI44_Q[1]);
-  assign X214_21_ZN = ~((X8617_Z|CTRL1)&(X8618_Z|CTRL2));
-  assign X420_ZN = ~((X421_Z|CTRL1)&(X3382_Z|CTRL2));
-  assign X421_Z = X8625_CO^a7^MI1_SUM[8];
-  assign X568_189_ZN = ~((HOLD0[1]&a7)|(X59_5_ZN&COUNT0));
-  assign X569_189_ZN = ~((X911_5_ZN&COUNT2)|(MI44_Q[2]&SET4));
-  assign X593_189_ZN = ~((X625_5_ZN&COUNT2)|(MI44_Q[1]&SET4));
-  assign X605_189_ZN = ~((HOLD0[2]&MI1_QT[0])|(COUNT0&X3484_ZN));
-  assign X622_5_ZN = raw_sum_ext[3];
-  assign X623_5_ZN = ~SET0N;
-  assign X625_5_ZN = raw_sum_ext[6];
-  assign X630_103_Z = MI1_SUM[1]&MI1_QT[0];
-  assign X630_189_ZN = ~((SET5&MI44_Q[0])|(COUNT2&X3484_ZN));
-  assign X636_64_ZN = ~(SET2&MI44_Q[0]);
-  assign X661_189_ZN = ~((HOLD0[2]&b3)|(COUNT0&X3510_ZN));
-  assign X684_189_ZN = ~((b8&HOLD0[0])|(COUNT0&X748_5_ZN));
-  assign X688_189_ZN = ~((a9&HOLD0[0])|(COUNT0&X1033_5_ZN));
-  assign X703_103_Z = MI1_SUM[1]&b0;
-  assign X744_64_ZN = ~(HOLD1[2]&b0);
-  assign X745_64_ZN = ~(SET2&MI44_Q[1]);
-  assign X747_5_ZN = raw_sum_ext[2];
-  assign X748_5_ZN = raw_sum_ext[9];
-  assign X751_5_ZN = raw_sum_ext[5];
-  assign X911_5_ZN = raw_sum_ext[7];
-  assign X1033_5_ZN = raw_sum_ext[10];
-  assign X1889_ZN = ~((X1890_Z|CTRL1)&(X8621_Z|CTRL2));
-  assign X1890_Z = X1891_CO^b4^MI1_SUM[5];
-  assign X1891_CO = (MI1_SUM[4]&X8637_CO)|(MI1_SUM[4]&b3)|(X8637_CO&b3);
-  assign X1892_CO = (MI1_SUM[9]&X31_263_CO)|(MI1_SUM[9]&b8)|(X31_263_CO&b8);
-  assign X2492_CO = (MI1_SUM[5]&X8634_CO)|(MI1_SUM[5]&a4)|(X8634_CO&a4);
-  assign X2503_Z = X2492_CO^a5^MI1_SUM[6];
-  assign X2504_Z = X32_263_CO^a6^MI1_SUM[7];
-  assign X2505_Z = X36_263_CO^b6^MI1_SUM[7];
-  assign X2506_Z = X8638_CO^b5^MI1_SUM[6];
-  assign X3382_Z = X28_263_CO^b7^MI1_SUM[8];
-  assign X3384_Z = X24_263_CO^a8^MI1_SUM[9];
-  assign X3484_ZN = raw_sum_ext[1];
-  assign X3510_ZN = raw_sum_ext[4];
-  assign X8258_ZN = ~((HOLD0[2]&b2)|(COUNT0&X622_5_ZN));
-  assign X8259_ZN = ~((HOLD0[2]&a1)|(COUNT0&X747_5_ZN));
-  assign X8261_ZN = ~((X751_5_ZN&COUNT2)|(MI44_Q[0]&SET4));
-  assign X8267_ZN = ~((HOLD1[0]&b10)|(MI44_Q[2]&SET3));
-  assign X8269_ZN = ~((a10&HOLD0[0])|(COUNT0&X8631_CO));
-  assign X8270_ZN = ~((HOLD0[1]&b5)|(X625_5_ZN&COUNT0));
-  assign X8271_ZN = ~((HOLD0[1]&b4)|(X751_5_ZN&COUNT0));
-  assign X8274_ZN = ~((HOLD1[0]&MI1_QT[1])|(MI44_Q[1]&SET3));
-  assign X8275_ZN = ~((HOLD0[1]&b6)|(X911_5_ZN&COUNT0));
-  assign X8276_ZN = ~((HOLD1[0]&a8)|(MI44_Q[0]&SET3));
-  assign X8277_ZN = ~((X59_5_ZN&COUNT2)|(MI44_Q[3]&SET4));
-  assign X8278_ZN = ~((MI44_Q[2]&SET5)|(X622_5_ZN&COUNT2));
-  assign X8279_ZN = ~((MI44_Q[1]&SET5)|(X747_5_ZN&COUNT2));
-  assign X8280_ZN = ~((MI44_Q[3]&SET5)|(X3510_ZN&COUNT2));
-  assign X8397_ZN = ~((X2506_Z|CTRL1)&(X2503_Z|CTRL2));
-  assign X8403_ZN = ~((X8613_Z|CTRL1)&(X8615_Z|CTRL2));
-  assign X8405_ZN = ~((X8614_Z|CTRL1)&(X3384_Z|CTRL2));
-  assign X8409_ZN = ~((X8630_CO|CTRL1)&(X33_263_CO|CTRL2));
-  assign X8411_ZN = ~((X2505_Z|CTRL1)&(X2504_Z|CTRL2));
-  assign X8418_ZN = ~((X8620_Z|CTRL1)&(X8623_Z|CTRL2));
-  assign X8419_ZN = ~((X8622_Z|CTRL1)&(X8624_Z|CTRL2));
-  assign X8500_ZN = ~(X623_5_ZN&MI44_Q[0]);
-  assign X8510_ZN = ~(HOLD1[2]&a2);
-  assign X8511_ZN = ~(HOLD1[1]&b7);
-  assign X8514_ZN = ~(X8631_CO&COUNT2);
-  assign X8515_ZN = ~(SET1&MI44_Q[2]);
-  assign X8517_ZN = ~(X623_5_ZN&MI44_Q[3]);
-  assign X8519_ZN = ~(X748_5_ZN&COUNT2);
-  assign X8522_ZN = ~(HOLD1[1]&a4);
-  assign X8526_ZN = ~(X623_5_ZN&MI44_Q[2]);
-  assign X8527_ZN = ~(X623_5_ZN&MI44_Q[1]);
-  assign X8531_ZN = ~(SET1&MI44_Q[0]);
-  assign X8543_ZN = ~(X1033_5_ZN&COUNT2);
-  assign X8549_ZN = ~(HOLD1[1]&a5);
-  assign X8557_ZN = ~(HOLD1[1]&a6);
-  assign X8559_ZN = ~(SET2&MI44_Q[3]);
-  assign X8613_Z = X1892_CO^a9^MI1_SUM[10];
-  assign X8614_Z = X31_263_CO^b8^MI1_SUM[9];
-  assign X8615_Z = X8635_CO^MI1_QT[1]^MI1_SUM[10];
-  assign X8616_Z = X27_263_CO^b2^MI1_SUM[3];
-  assign X8617_Z = X630_103_Z^a1^MI1_SUM[2];
-  assign X8618_Z = X703_103_Z^b1^MI1_SUM[2];
-  assign X8619_Z = X8626_CO^a2^MI1_SUM[3];
-  assign X8620_Z = X8637_CO^b3^MI1_SUM[4];
-  assign X8621_Z = X8634_CO^a4^MI1_SUM[5];
-  assign X8622_Z = X47_344_CO^a10^MI1_SUM[11];
-  assign X8623_Z = X8628_CO^a3^MI1_SUM[4];
-  assign X8624_Z = X8633_CO^b10^MI1_SUM[11];
-  assign X8625_CO = (MI1_SUM[7]&X36_263_CO)|(MI1_SUM[7]&b6)|(X36_263_CO&b6);
-  assign X8626_CO = (MI1_SUM[2]&X703_103_Z)|(MI1_SUM[2]&b1)|(X703_103_Z&b1);
-  assign X8628_CO = (MI1_SUM[3]&X8626_CO)|(MI1_SUM[3]&a2)|(X8626_CO&a2);
-  assign X8630_CO = (MI1_SUM[11]&X47_344_CO)|(MI1_SUM[11]&a10)|(X47_344_CO&a10);
-  assign X8631_CO = raw_sum_ext[11];
-  assign X8633_CO = (MI1_SUM[10]&X8635_CO)|(MI1_SUM[10]&MI1_QT[1])|(X8635_CO&MI1_QT[1]);
-  assign X8634_CO = (MI1_SUM[4]&X8628_CO)|(MI1_SUM[4]&a3)|(X8628_CO&a3);
-  assign X8635_CO = (MI1_SUM[9]&X24_263_CO)|(MI1_SUM[9]&a8)|(X24_263_CO&a8);
-  assign X8637_CO = (MI1_SUM[3]&X27_263_CO)|(MI1_SUM[3]&b2)|(X27_263_CO&b2);
-  assign X8638_CO = (MI1_SUM[5]&X1891_CO)|(MI1_SUM[5]&b4)|(X1891_CO&b4);
 
-  // CLK_A, RST_MAIN, SEL_A
+  // Word-level arithmetic
+  wire [10:0] opA         = {a10, a9, a8, a7, a6, a5, a4, a3, a2, a1, a0};
+  wire [10:0] opB         = {b10, b9, b8, b7, b6, b5, b4, b3, b2, b1, b0};
+  wire [11:0] sum_ext     = {1'b0, opA} + {1'b0, opB} + {11'b0, CTRL0};
+  wire [11:0] raw_sum_ext = {1'b0, opA} + {1'b0, opB};
+  assign MI1_SUM = sum_ext[11:1];
+
+  // Carry-compare chains (opA+opB running carry vs MI1_SUM at each bit)
+  wire X630_103_Z = MI1_SUM[1] & MI1_QT[0];
+  wire X703_103_Z = MI1_SUM[1] & b0;
+  wire X27_263_CO  = (MI1_SUM[2] & X630_103_Z) | (MI1_SUM[2] & a1)      | (X630_103_Z & a1);
+  wire X8626_CO    = (MI1_SUM[2] & X703_103_Z) | (MI1_SUM[2] & b1)      | (X703_103_Z & b1);
+  wire X8637_CO    = (MI1_SUM[3] & X27_263_CO) | (MI1_SUM[3] & b2)      | (X27_263_CO & b2);
+  wire X8628_CO    = (MI1_SUM[3] & X8626_CO)   | (MI1_SUM[3] & a2)      | (X8626_CO & a2);
+  wire X1891_CO    = (MI1_SUM[4] & X8637_CO)   | (MI1_SUM[4] & b3)      | (X8637_CO & b3);
+  wire X8634_CO    = (MI1_SUM[4] & X8628_CO)   | (MI1_SUM[4] & a3)      | (X8628_CO & a3);
+  wire X8638_CO    = (MI1_SUM[5] & X1891_CO)   | (MI1_SUM[5] & b4)      | (X1891_CO & b4);
+  wire X2492_CO    = (MI1_SUM[5] & X8634_CO)   | (MI1_SUM[5] & a4)      | (X8634_CO & a4);
+  wire X36_263_CO  = (MI1_SUM[6] & X8638_CO)   | (MI1_SUM[6] & b5)      | (X8638_CO & b5);
+  wire X32_263_CO  = (MI1_SUM[6] & X2492_CO)   | (MI1_SUM[6] & a5)      | (X2492_CO & a5);
+  wire X8625_CO    = (MI1_SUM[7] & X36_263_CO) | (MI1_SUM[7] & b6)      | (X36_263_CO & b6);
+  wire X28_263_CO  = (MI1_SUM[7] & X32_263_CO) | (MI1_SUM[7] & a6)      | (X32_263_CO & a6);
+  wire X31_263_CO  = (MI1_SUM[8] & X8625_CO)   | (MI1_SUM[8] & a7)      | (X8625_CO & a7);
+  wire X24_263_CO  = (MI1_SUM[8] & X28_263_CO) | (MI1_SUM[8] & b7)      | (X28_263_CO & b7);
+  wire X1892_CO    = (MI1_SUM[9] & X31_263_CO) | (MI1_SUM[9] & b8)      | (X31_263_CO & b8);
+  wire X8635_CO    = (MI1_SUM[9] & X24_263_CO) | (MI1_SUM[9] & a8)      | (X24_263_CO & a8);
+  wire X47_344_CO  = (MI1_SUM[10] & X1892_CO)  | (MI1_SUM[10] & a9)     | (X1892_CO & a9);
+  wire X8633_CO    = (MI1_SUM[10] & X8635_CO)  | (MI1_SUM[10] & MI1_QT[1]) | (X8635_CO & MI1_QT[1]);
+
+  // neq_N: 1 when carry-compare at SUM[N] shows mismatch (suppresses update)
+  wire neq_2   = ~(((X630_103_Z ^ a1  ^ MI1_SUM[2]) | CTRL1) & ((X703_103_Z ^ b1        ^ MI1_SUM[2])  | CTRL2));
+  wire neq_3   = ~(((X27_263_CO  ^ b2  ^ MI1_SUM[3]) | CTRL1) & ((X8626_CO   ^ a2        ^ MI1_SUM[3])  | CTRL2));
+  wire neq_4   = ~(((X8637_CO   ^ b3  ^ MI1_SUM[4]) | CTRL1) & ((X8628_CO   ^ a3        ^ MI1_SUM[4])  | CTRL2));
+  wire neq_5   = ~(((X1891_CO   ^ b4  ^ MI1_SUM[5]) | CTRL1) & ((X8634_CO   ^ a4        ^ MI1_SUM[5])  | CTRL2));
+  wire neq_6   = ~(((X8638_CO   ^ b5  ^ MI1_SUM[6]) | CTRL1) & ((X2492_CO   ^ a5        ^ MI1_SUM[6])  | CTRL2));
+  wire neq_7   = ~(((X36_263_CO ^ b6  ^ MI1_SUM[7]) | CTRL1) & ((X32_263_CO ^ a6        ^ MI1_SUM[7])  | CTRL2));
+  wire neq_8   = ~(((X8625_CO   ^ a7  ^ MI1_SUM[8]) | CTRL1) & ((X28_263_CO ^ b7        ^ MI1_SUM[8])  | CTRL2));
+  wire neq_9   = ~(((X31_263_CO ^ b8  ^ MI1_SUM[9]) | CTRL1) & ((X24_263_CO ^ a8        ^ MI1_SUM[9])  | CTRL2));
+  wire neq_10  = ~(((X1892_CO   ^ a9  ^ MI1_SUM[10])| CTRL1) & ((X8635_CO   ^ MI1_QT[1] ^ MI1_SUM[10]) | CTRL2));
+  wire neq_11  = ~(((X47_344_CO ^ a10 ^ MI1_SUM[11])| CTRL1) & ((X8633_CO   ^ b10       ^ MI1_SUM[11]) | CTRL2));
+  wire neq_c11 = ~((((MI1_SUM[11]&X47_344_CO)|(MI1_SUM[11]&a10)|(X47_344_CO&a10))|CTRL1) &
+                   (((MI1_SUM[11]&X8633_CO)  |(MI1_SUM[11]&b10)|(X8633_CO&b10))  |CTRL2));
+
+  // G1: CLK_A, RST_MAIN, SEL_A
   always @(posedge CLK_A or negedge RST_MAIN) begin
     if (!RST_MAIN) begin
-      a1 <= 1'b0;
-      b1 <= 1'b0;
-      a0 <= 1'b0;
-      b0 <= 1'b0;
+      a0 <= 1'b0; b0  <= 1'b0;
+      a1 <= 1'b0; b1  <= 1'b0;
       b10 <= 1'b0;
     end else begin
-      a1 <= SEL_A ? b1 : (~((COUNT1N|X154_21_ZN)&X8259_ZN&X745_64_ZN));
-      b1 <= SEL_A ? b2 : (~((COUNT3N|X154_21_ZN)&X8279_ZN&X30_6_ZN));
-      a0 <= SEL_A ? a1 : (~((COUNT1N|X214_21_ZN)&X605_189_ZN&X636_64_ZN));
-      b0 <= SEL_A ? b10 : (~((COUNT3N|X214_21_ZN)&X630_189_ZN&X744_64_ZN));
-      b10 <= SEL_A ? DT[0] : (~((COUNT3N|X8409_ZN)&X8267_ZN&X8514_ZN));
+      a0  <= SEL_A ? a1    : (~((COUNT1N|neq_2)  &(~((HOLD0[2]&MI1_QT[0])|(COUNT0&raw_sum_ext[1])))&(~(SET2&MI44_Q[0]))));
+      b0  <= SEL_A ? b10   : (~((COUNT3N|neq_2)  &(~((SET5&MI44_Q[0])|(COUNT2&raw_sum_ext[1])))    &(~(HOLD1[2]&b0))));
+      a1  <= SEL_A ? b1    : (~((COUNT1N|neq_3)  &(~((HOLD0[2]&a1)|(COUNT0&raw_sum_ext[2])))       &(~(SET2&MI44_Q[1]))));
+      b1  <= SEL_A ? b2    : (~((COUNT3N|neq_3)  &(~((MI44_Q[1]&SET5)|(raw_sum_ext[2]&COUNT2)))    &(~(HOLD1[2]&b1))));
+      b10 <= SEL_A ? DT[0] : (~((COUNT3N|neq_c11)&(~((HOLD1[0]&b10)|(MI44_Q[2]&SET3)))            &(~(raw_sum_ext[11]&COUNT2))));
     end
   end
 
-  // CLK_B, RST_MAIN, SEL_A
+  // G2: CLK_B, RST_MAIN, SEL_A
   always @(posedge CLK_B or negedge RST_MAIN) begin
     if (!RST_MAIN) begin
-      a10 <= 1'b0;
-      a3 <= 1'b0;
-      a2 <= 1'b0;
-      b2 <= 1'b0;
-      a9 <= 1'b0;
+      a2 <= 1'b0; b2  <= 1'b0;
+      a3 <= 1'b0; a9  <= 1'b0; a10 <= 1'b0;
     end else begin
-      a10 <= SEL_A ? b0 : (~((COUNT1N|X8409_ZN)&X8269_ZN&X8515_ZN));
-      a3 <= SEL_A ? b3 : (~((COUNT3N|X1889_ZN)&X8280_ZN&X72_6_ZN));
-      a2 <= SEL_A ? a3 : (~((COUNT3N|X8418_ZN)&X8278_ZN&X8510_ZN));
-      b2 <= SEL_A ? a2 : (~((COUNT1N|X8418_ZN)&X8258_ZN&X4_6_ZN));
-      a9 <= SEL_A ? a10 : (~((COUNT1N|X8419_ZN)&X688_189_ZN&X212_6_ZN));
+      a2  <= SEL_A ? a3    : (~((COUNT3N|neq_4)  &(~((MI44_Q[2]&SET5)|(raw_sum_ext[3]&COUNT2)))    &(~(HOLD1[2]&a2))));
+      b2  <= SEL_A ? a2    : (~((COUNT1N|neq_4)  &(~((HOLD0[2]&b2)|(COUNT0&raw_sum_ext[3])))       &(~(SET2&MI44_Q[2]))));
+      a3  <= SEL_A ? b3    : (~((COUNT3N|neq_5)  &(~((MI44_Q[3]&SET5)|(raw_sum_ext[4]&COUNT2)))    &(~(HOLD1[2]&a3))));
+      a9  <= SEL_A ? a10   : (~((COUNT1N|neq_11) &(~((a9&HOLD0[0])|(COUNT0&raw_sum_ext[10])))      &(~(SET1&MI44_Q[1]))));
+      a10 <= SEL_A ? b0    : (~((COUNT1N|neq_c11)&(~((a10&HOLD0[0])|(COUNT0&raw_sum_ext[11])))     &(~(SET1&MI44_Q[2]))));
     end
   end
 
-  // CLK_B, RST_AUX, SEL_A
+  // G3: CLK_B, RST_AUX, SEL_A
   always @(posedge CLK_B or negedge RST_AUX) begin
     if (!RST_AUX) begin
       b9 <= 1'b0;
     end else begin
-      b9 <= SEL_A ? a9 : (~((COUNT3N|X8419_ZN)&X8274_ZN&X8543_ZN));
+      b9 <= SEL_A ? a9 : (~((COUNT3N|neq_11)&(~((HOLD1[0]&MI1_QT[1])|(MI44_Q[1]&SET3)))&(~(raw_sum_ext[10]&COUNT2))));
     end
   end
 
-  // CLK_B, RST_MAIN, SEL_B
+  // G4: CLK_B, RST_MAIN, SEL_B
   always @(posedge CLK_B or negedge RST_MAIN) begin
     if (!RST_MAIN) begin
-      a4 <= 1'b0;
-      a6 <= 1'b0;
-      b5 <= 1'b0;
-      b4 <= 1'b0;
-      b3 <= 1'b0;
-      b6 <= 1'b0;
-      a5 <= 1'b0;
-      a7 <= 1'b0;
-      b7 <= 1'b0;
+      b3 <= 1'b0; b4 <= 1'b0; a4 <= 1'b0;
+      b5 <= 1'b0; a5 <= 1'b0;
+      b6 <= 1'b0; a6 <= 1'b0;
+      a7 <= 1'b0; b7 <= 1'b0;
     end else begin
-      a4 <= SEL_B ? b5 : (~((COUNT3N|X8397_ZN)&X8261_ZN&X8522_ZN));
-      a6 <= SEL_B ? b6 : (~((COUNT3N|X420_ZN)&X569_189_ZN&X8557_ZN));
-      b5 <= SEL_B ? a5 : (~((COUNT1N|X8411_ZN)&X8270_ZN&X8527_ZN));
-      b4 <= SEL_B ? a4 : (~((COUNT1N|X8397_ZN)&X8271_ZN&X8500_ZN));
-      b3 <= SEL_B ? b4 : (~((COUNT1N|X1889_ZN)&X661_189_ZN&X8559_ZN));
-      b6 <= SEL_B ? b7 : (~((COUNT1N|X420_ZN)&X8275_ZN&X8526_ZN));
-      a5 <= SEL_B ? a6 : (~((COUNT3N|X8411_ZN)&X593_189_ZN&X8549_ZN));
-      a7 <= SEL_B ? b8 : (~((COUNT1N|X8405_ZN)&X568_189_ZN&X8517_ZN));
-      b7 <= SEL_B ? a7 : (~((COUNT3N|X8405_ZN)&X8277_ZN&X8511_ZN));
+      b3  <= SEL_B ? b4   : (~((COUNT1N|neq_5) &(~((HOLD0[2]&b3)|(COUNT0&raw_sum_ext[4])))      &(~(SET2&MI44_Q[3]))));
+      b4  <= SEL_B ? a4   : (~((COUNT1N|neq_6) &(~((HOLD0[1]&b4)|(raw_sum_ext[5]&COUNT0)))      &(~(~SET0N&MI44_Q[0]))));
+      a4  <= SEL_B ? b5   : (~((COUNT3N|neq_6) &(~((raw_sum_ext[5]&COUNT2)|(MI44_Q[0]&SET4)))   &(~(HOLD1[1]&a4))));
+      b5  <= SEL_B ? a5   : (~((COUNT1N|neq_7) &(~((HOLD0[1]&b5)|(raw_sum_ext[6]&COUNT0)))      &(~(~SET0N&MI44_Q[1]))));
+      a5  <= SEL_B ? a6   : (~((COUNT3N|neq_7) &(~((raw_sum_ext[6]&COUNT2)|(MI44_Q[1]&SET4)))   &(~(HOLD1[1]&a5))));
+      b6  <= SEL_B ? b7   : (~((COUNT1N|neq_8) &(~((HOLD0[1]&b6)|(raw_sum_ext[7]&COUNT0)))      &(~(~SET0N&MI44_Q[2]))));
+      a6  <= SEL_B ? b6   : (~((COUNT3N|neq_8) &(~((raw_sum_ext[7]&COUNT2)|(MI44_Q[2]&SET4)))   &(~(HOLD1[1]&a6))));
+      a7  <= SEL_B ? b8   : (~((COUNT1N|neq_9) &(~((HOLD0[1]&a7)|(raw_sum_ext[8]&COUNT0)))      &(~(~SET0N&MI44_Q[3]))));
+      b7  <= SEL_B ? a7   : (~((COUNT3N|neq_9) &(~((raw_sum_ext[8]&COUNT2)|(MI44_Q[3]&SET4)))   &(~(HOLD1[1]&b7))));
     end
   end
 
-  // CLK_B, RST_AUX, SEL_B
+  // G5: CLK_B, RST_AUX, SEL_B
   always @(posedge CLK_B or negedge RST_AUX) begin
     if (!RST_AUX) begin
-      b8 <= 1'b0;
-      a8 <= 1'b0;
+      b8 <= 1'b0; a8 <= 1'b0;
     end else begin
-      b8 <= SEL_B ? a8 : (~((COUNT1N|X8403_ZN)&X684_189_ZN&X8531_ZN));
-      a8 <= SEL_B ? DT[1] : (~((COUNT3N|X8403_ZN)&X8276_ZN&X8519_ZN));
+      b8 <= SEL_B ? a8    : (~((COUNT1N|neq_10)&(~((b8&HOLD0[0])|(COUNT0&raw_sum_ext[9])))      &(~(SET1&MI44_Q[0]))));
+      a8 <= SEL_B ? DT[1] : (~((COUNT3N|neq_10)&(~((HOLD1[0]&a8)|(MI44_Q[0]&SET3)))            &(~(raw_sum_ext[9]&COUNT2))));
     end
   end
 
