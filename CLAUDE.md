@@ -1,79 +1,58 @@
-# CLAUDE.md
+# CLAUDE.md — RE-Agent 宪法（共有铁律，全程只读这一次）
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+> 本文件是项目级稳定约定。三份 skill 不再重复这些铁律，只写各阶段独有步骤。
+> Claude Code 开会话时自动加载本文件一次，全程复用。
 
-## What this project is
+## 一句话目标
+把门级网表 `impl.v` 逆向成**可读的**字级行为 RTL `spec.v`，并由**确定性形式等价**证明正确。
+当前目标设计 COUNT_12BX2（22 FF）；可读性标杆 COUNT_6B_2/spec.v。
 
-A **hardware reverse engineering and formal equivalence verification** workspace. Gate-level netlists from a proprietary ASIC library (`HCQ_2404150`) are reverse-engineered into behavioral RTL specifications, then formally proven equivalent using Yosys.
+## 唯一判准：读 / 猜 / 判
+一个论断若**对错可被机器验证** → 交确定性闸门**判**；
+若本质是**「猜设计者把什么字级结构综合成了这堆门」** → 交大模型**猜**。
+**大模型只猜，闸门只判，永不互换。**
 
-## Running equivalence checks
+- **读**（确定性脚本）：网表上能直接读出的事实——FF 清单、clk/rst、D 锥支持集、进位链邻接、总线下标、cofactor。
+- **猜**（大模型外展）：算子身份、哪些位拼成一个字、位序、寄存器对应、语义命名、控制流写法。
+- **判**（确定性闸门）：等价（神圣）、grow_patterns 算子验证、可读性语法下限。
 
-```bash
-# Run a completed equivalence check (COUNT_6B_2 is the worked example)
-cd COUNT_6B_2
-yosys equiv.ys
+**铁律：每个「猜」必须被一个「判」钉死；没有任何「猜」能仅凭自身被信任。**
 
-# Or from the repo root using the system yosys
-yosys COUNT_6B_2/equiv.ys
+## 不可动摇的红线
+1. **等价是唯一判决来源**：推进信号永远是 `check_equiv.py` 的 exit code，不是「我觉得行了」。
+2. **绝不伪造 PASS**：连续重试+升级仍 FAIL → 回传 `blocked` + cex，停下请人介入。绝不谎报通过、绝不编造数据掩盖失败。
+3. **大文件永不进上下文**：netlist、535 行锚点、布尔 dump、VCD 只进脚本，脚本吐一行小 JSON 摘要；模型只看摘要。
+4. **缺模型/缺数据立即停**：单元缺行为模型、机器事实缺失 → 停止报告，绝不编造补齐。
+5. **绝不手写 De Morgan / NAND 树**：需要某组合信号 → 它要么在 candidate_words/字级算术里，要么去 decode_modes 拿。
 
-# Or using the bundled yosys submodule (if built)
-yosys/yosys COUNT_6B_2/equiv.ys
+## 防 Goodhart（可读性）
+`check_readability --score` 测的是**语法卫生（下限梯度）**，**不是「真好读」**。
+真可读性是大模型软信号，**永不当确定性目标、永不否决正确性、永不可被刷分**。
+任何 `violations` 非空的候选一律拒收，即使分数更高。
+
+## 关键环境事实（缺一即坑）
+- Yosys 0.9（2019）。`extract_fa` 会崩（extract_fa.cc:218）——**保持禁用**。
+- `abc -g` 可用集 = `AND,OR,XOR,MUX`（别名 simple）。`extract` 可用。
+- FF 单元 `SC_MFC_140_80`：`Q <= S ? D1 : D0`，异步清 `CDN`（低有效 negedge），时钟 `CP`。
+- `X19_GS`/`X19_VS` 是供电网，**剥离**、作 don't-care 切除。
+- WSL2 + 代理（Clash）联网。
+
+## 目录地图
+```
+.claude/skills/{build-scripts,anchor,abstract-group}/SKILL.md   # 各阶段独有步骤（按需加载）
+scripts/        # 确定性脚本：吃大文件、吐小 JSON。会话用 Bash 直跑，零大模型 token
+COUNT_12BX2/    # 当前设计：impl.v / spec_*.v / ff_map.json / modes/ / verify/ / equiv_out/
+COUNT_6B_2/     # 可读性标杆
+.tasks/         # 每组一行小 JSON，跨会话可恢复（恢复读台账，不重放历史）
 ```
 
-The script passes if `equiv_status -assert` emits no error. Any "unproven" or "not equivalent" output indicates a mismatch between `impl.v` and `spec.v`.
+## 流程总览（A→B→C→D，靠会话推进，非冷启动 driver）
+- **A** build-scripts：建脚本 + 跑 5 项自检（闸门可信才往下）。
+- **B** anchor：外展 ff_map/算子，grow_patterns 证 UNSAT，合成锚点并 comb-PASS，产机器事实，写 .tasks/。
+- **C** abstract-group：逐组把机器事实写成干净 always 块，组级 comb-equiv + 可读下限。
+- **D** refine：等价硬约束下按可读分数爬向标杆（棘轮，永不退化）。
 
-## Yosys equivalence check script structure
-
-`equiv.ys` (see `COUNT_6B_2/equiv.ys`) always follows this pattern:
-
-1. Read `SC_LIB_SCH.v` + `impl.v` + `spec.v`
-2. `prep -top <impl_module>` → `flatten` → `async2sync` → `design -save impl`
-3. Reset, re-read, `prep -top <spec_module>` → `flatten` → `async2sync` → `design -save spec`
-4. `design -copy-from impl -as gate <impl_module>` and `-copy-from spec -as gold <spec_module>`
-5. `equiv_make gold gate equiv` → `hierarchy -top equiv` → `equiv_simple` → `equiv_induct` → `equiv_status -assert`
-
-`async2sync` is required because the flip-flops use asynchronous active-low clear (`CDN`).
-
-## Directory layout
-
-| Directory | Contents |
-|---|---|
-| `COUNT_6B_2/` | Complete example: impl netlist + behavioral spec + `equiv.ys` |
-| `COUNT_12BX2/` | Complex 12-bit counter; impl + library only, spec not yet written |
-| `Netlist/` | Hierarchical netlist (`SC_HIER.v`) using a subset of the SC library |
-| `yosys/` | Yosys source tree (submodule) |
-
-Each working directory contains its own `SC_LIB_SCH.v` — a Verilog behavioral model of the standard cell library required by that netlist. `Netlist/SC_HIER.v` re-defines only the specific cells it uses rather than pulling in the full library.
-
-## Standard cell library conventions
-
-All cells in `SC_LIB_SCH.v` follow `SC_<FUNCTION>_<WIDTH>_<HEIGHT>[variant]`. The `GS` (ground) and `VS` (supply) pins are present on every cell but carry no logic; they can be ignored when reading or writing Verilog.
-
-Key sequential cells:
-- `SC_MFC_*` — Mux-D flip-flop with async clear (`CDN`). `S=0` → `D0`, `S=1` → `D1`. This is the dominant register type.
-- `SC_DFC_*` — Standard D flip-flop with async clear.
-- `SC_DFB_*` / `SC_MFB_*` — Variants with both async clear (`CDN`) and async set (`SDN`).
-- `SC_MFC_140_80S1` / `SC_MFS_140_80` — **Inverted-data variants**: these store `~(S ? D1 : D0)`, not the raw mux output. Don't miss this when reading the netlist.
-
-Key arithmetic cells:
-- `SC_CARRY_140_80` — Full carry: `CO = (A&B)|(A&CI)|(B&CI)`. No sum output.
-- `SC_HADD_140_80` — Half adder: `SUM = A^B`, `CO = A&B`.
-- `SC_XOR3_E140_90` / `SC_XNOR3_140_E90` — 3-input XOR/XNOR. Used for sum bits in multi-bit adder trees.
-
-Active-low signals use the `N` suffix (e.g., `CDN` = clear-active-low, `ZN` = inverted output).
-
-## Writing a behavioral spec
-
-The spec module must have a **different top-level name** from the impl module (e.g., `COUNT_6B_2_spec` vs `COUNT_6B_2`) so both can coexist in the same Yosys design. Port names and directions must match the impl exactly. Use `always @(posedge CLK or negedge RST)` with `async2sync` handling the reset polarity.
-
-See `COUNT_6B_2/spec.v` for a complete example of a reverse-engineered behavioral spec.
-
-## COUNT_12BX2 complexity notes
-
-COUNT_12BX2 is significantly harder than COUNT_6B_2. Key differences to account for when writing its spec:
-
-- **Two clocks**: `X1026_138_ZN` (used by the `MI1_QT` output registers and `X1805`/`X1806`) and `X1027_138_ZN` (used by most internal state registers).
-- **Two reset domains**: most FFs use `X3_323_Z` as `CDN`; `X1795`, `X1798`, and `X1800` use `X1676_Z` instead.
-- **Two mux-select inputs**: `X8710_Z` (selects `D1` for the `MI1_QT`-domain FFs) and `X412_46_Z` (for the `X1027` clock domain).
-- **Arithmetic carry chain**: the `MI1_SUM[1:11]` outputs are formed from a tree of `SC_CARRY_140_80`, `SC_HADD_140_80`, `SC_XOR3`, and `SC_XNOR3` cells that add multiple internal register values together.
-- **Output muxing via CTRL0/CTRL1/CTRL2**: the final `MI1_SUM` values are selected between two computed results using `SC_AO22` (for `CTRL0`) and `SC_OAI22`/`SC_OAI211` (for the carry inputs to the D-inputs of state FFs via `CTRL1`/`CTRL2`).
+## 调试期工作方式
+单个 design 调试**不跑 driver.py 冷启动**。在一个温交互会话里逐步走：
+脚本用 Bash 直跑；大文件不读进来；每步只把脚本吐的小 JSON 贴回。
+（批量跑几十个 design 时才用 Tier-2 启动器：per-design 一次 headless 会话，不是 per-phase。）

@@ -1,7 +1,0 @@
-read_verilog -lib ./SC_LIB_SCH.v
-read_verilog ./impl.v
-hierarchy -top COUNT_12BX2 -check
-proc
-opt_clean
-stat
-write_json inventory.json

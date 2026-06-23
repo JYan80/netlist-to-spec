@@ -22,10 +22,10 @@
  Yosys 0.9 (git sha1 1979e0b)
 
 
--- Executing script file `/tmp/tmpva_fx6sn/comb.ys' --
+-- Executing script file `/tmp/tmpq161quux/comb.ys' --
 
-1. Executing Verilog-2005 frontend: SC_LIB_SCH.v
-Parsing Verilog input from `SC_LIB_SCH.v' to AST representation.
+1. Executing Verilog-2005 frontend: COUNT_12BX2/SC_LIB_SCH.v
+Parsing Verilog input from `COUNT_12BX2/SC_LIB_SCH.v' to AST representation.
 Generating RTLIL representation for module `\SC_AND2B2_140_90D2'.
 Generating RTLIL representation for module `\SC_AND2B2_140_90D4'.
 Generating RTLIL representation for module `\SC_AND2_50_30'.
@@ -73,7 +73,7 @@ Generating RTLIL representation for module `\SC_DFB_140_90'.
 Generating RTLIL representation for module `\SC_DFC_140_90'.
 Generating RTLIL representation for module `\SC_DFS_140_90'.
 Generating RTLIL representation for module `\SC_FNCLOCKGATING_140_80'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:885 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:885 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_HADD_140_80'.
@@ -87,15 +87,15 @@ Generating RTLIL representation for module `\SC_INV_140_100D2'.
 Generating RTLIL representation for module `\SC_INV_140_100D3'.
 Generating RTLIL representation for module `\SC_INV_140_100D4'.
 Generating RTLIL representation for module `\SC_LAC_140_80'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:1073 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:1073 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_LAC_140_80S1'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:1101 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:1101 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_LAS_140_80'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:1129 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:1129 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_MFB_140_80'.
@@ -170,203 +170,203 @@ Generating RTLIL representation for module `\SC_XOR2_E120_70'.
 Generating RTLIL representation for module `\SC_XOR3_E140_90'.
 Successfully finished Verilog frontend.
 
-2. Executing Verilog-2005 frontend: impl.v
-Parsing Verilog input from `impl.v' to AST representation.
+2. Executing Verilog-2005 frontend: COUNT_12BX2/impl.v
+Parsing Verilog input from `COUNT_12BX2/impl.v' to AST representation.
 Generating RTLIL representation for module `\COUNT_12BX2'.
-impl.v:45: Warning: Identifier `\X421_73_ZN' is implicitly declared.
-impl.v:45: Warning: Identifier `\X0_1625_Q' is implicitly declared.
-impl.v:47: Warning: Identifier `\X467_73_ZN' is implicitly declared.
-impl.v:47: Warning: Identifier `\X0_1626_Q' is implicitly declared.
-impl.v:49: Warning: Identifier `\X409_73_ZN' is implicitly declared.
-impl.v:49: Warning: Identifier `\X1804_Q' is implicitly declared.
-impl.v:51: Warning: Identifier `\X633_207_ZN' is implicitly declared.
-impl.v:52: Warning: Identifier `\X1713_Q' is implicitly declared.
-impl.v:52: Warning: Identifier `\X0_1715_Q' is implicitly declared.
-impl.v:53: Warning: Identifier `\X4_6_ZN' is implicitly declared.
-impl.v:54: Warning: Identifier `\X8330_SUM' is implicitly declared.
-impl.v:54: Warning: Identifier `\X748_5_ZN' is implicitly declared.
-impl.v:54: Warning: Identifier `\X746_5_ZN' is implicitly declared.
-impl.v:56: Warning: Identifier `\X28_263_CO' is implicitly declared.
-impl.v:56: Warning: Identifier `\X63_1886_Q' is implicitly declared.
-impl.v:56: Warning: Identifier `\X24_263_CO' is implicitly declared.
-impl.v:58: Warning: Identifier `\X72_330_CO' is implicitly declared.
-impl.v:58: Warning: Identifier `\X25_263_CO' is implicitly declared.
-impl.v:60: Warning: Identifier `\X57_10_Q' is implicitly declared.
-impl.v:60: Warning: Identifier `\X3383_CO' is implicitly declared.
-impl.v:60: Warning: Identifier `\X26_263_CO' is implicitly declared.
-impl.v:62: Warning: Identifier `\X630_103_Z' is implicitly declared.
-impl.v:62: Warning: Identifier `\X27_263_CO' is implicitly declared.
-impl.v:64: Warning: Identifier `\X32_263_CO' is implicitly declared.
-impl.v:64: Warning: Identifier `\X1712_Q' is implicitly declared.
-impl.v:66: Warning: Identifier `\X72_330_SUM' is implicitly declared.
-impl.v:66: Warning: Identifier `\X3484_ZN' is implicitly declared.
-impl.v:66: Warning: Identifier `\X29_85_CO' is implicitly declared.
-impl.v:67: Warning: Identifier `\X29_85_SUM' is implicitly declared.
-impl.v:69: Warning: Identifier `\X30_6_ZN' is implicitly declared.
-impl.v:70: Warning: Identifier `\X1796_Q' is implicitly declared.
-impl.v:70: Warning: Identifier `\X8636_CO' is implicitly declared.
-impl.v:70: Warning: Identifier `\X30_263_CO' is implicitly declared.
-impl.v:72: Warning: Identifier `\X8625_CO' is implicitly declared.
-impl.v:72: Warning: Identifier `\X31_263_CO' is implicitly declared.
-impl.v:74: Warning: Identifier `\X2492_CO' is implicitly declared.
-impl.v:74: Warning: Identifier `\X430_309_Q' is implicitly declared.
-impl.v:76: Warning: Identifier `\X8633_CO' is implicitly declared.
-impl.v:76: Warning: Identifier `\X1806_Q' is implicitly declared.
-impl.v:76: Warning: Identifier `\X33_263_CO' is implicitly declared.
-impl.v:78: Warning: Identifier `\X8638_CO' is implicitly declared.
-impl.v:78: Warning: Identifier `\X36_263_CO' is implicitly declared.
-impl.v:80: Warning: Identifier `\X8341_CO' is implicitly declared.
-impl.v:80: Warning: Identifier `\X59_5_ZN' is implicitly declared.
-impl.v:80: Warning: Identifier `\X38_85_CO' is implicitly declared.
-impl.v:81: Warning: Identifier `\X38_85_SUM' is implicitly declared.
-impl.v:82: Warning: Identifier `\X1795_Q' is implicitly declared.
-impl.v:82: Warning: Identifier `\X1798_Q' is implicitly declared.
-impl.v:82: Warning: Identifier `\X46_344_CO' is implicitly declared.
-impl.v:84: Warning: Identifier `\X1892_CO' is implicitly declared.
-impl.v:84: Warning: Identifier `\X1849_Q' is implicitly declared.
-impl.v:84: Warning: Identifier `\X47_344_CO' is implicitly declared.
-impl.v:86: Warning: Identifier `\X8641_ZN' is implicitly declared.
-impl.v:88: Warning: Identifier `\X8350_ZN' is implicitly declared.
-impl.v:89: Warning: Identifier `\X3385_ZN' is implicitly declared.
-impl.v:91: Warning: Identifier `\X1802_Q' is implicitly declared.
-impl.v:92: Warning: Identifier `\X72_6_ZN' is implicitly declared.
-impl.v:93: Warning: Identifier `\X1805_Q' is implicitly declared.
-impl.v:95: Warning: Identifier `\X8616_Z' is implicitly declared.
-impl.v:95: Warning: Identifier `\X8619_Z' is implicitly declared.
-impl.v:96: Warning: Identifier `\X154_21_ZN' is implicitly declared.
-impl.v:97: Warning: Identifier `\X8343_SUM' is implicitly declared.
-impl.v:97: Warning: Identifier `\X747_5_ZN' is implicitly declared.
-impl.v:99: Warning: Identifier `\X1661_SUM' is implicitly declared.
-impl.v:99: Warning: Identifier `\X625_5_ZN' is implicitly declared.
-impl.v:102: Warning: Identifier `\X212_6_ZN' is implicitly declared.
-impl.v:103: Warning: Identifier `\X8617_Z' is implicitly declared.
-impl.v:103: Warning: Identifier `\X8618_Z' is implicitly declared.
-impl.v:104: Warning: Identifier `\X214_21_ZN' is implicitly declared.
-impl.v:105: Warning: Identifier `\X422_73_ZN' is implicitly declared.
-impl.v:106: Warning: Identifier `\X351_44_Q' is implicitly declared.
-impl.v:107: Warning: Identifier `\X8279_ZN' is implicitly declared.
-impl.v:109: Warning: Identifier `\X8340_SUM' is implicitly declared.
-impl.v:109: Warning: Identifier `\X1033_5_ZN' is implicitly declared.
-impl.v:111: Warning: Identifier `\X421_Z' is implicitly declared.
-impl.v:111: Warning: Identifier `\X3382_Z' is implicitly declared.
-impl.v:112: Warning: Identifier `\X420_ZN' is implicitly declared.
-impl.v:115: Warning: Identifier `\X605_189_ZN' is implicitly declared.
-impl.v:115: Warning: Identifier `\X636_64_ZN' is implicitly declared.
-impl.v:117: Warning: Identifier `\X8275_ZN' is implicitly declared.
-impl.v:117: Warning: Identifier `\X8526_ZN' is implicitly declared.
-impl.v:119: Warning: Identifier `\X632_207_ZN' is implicitly declared.
-impl.v:121: Warning: Identifier `\X630_189_ZN' is implicitly declared.
-impl.v:121: Warning: Identifier `\X744_64_ZN' is implicitly declared.
-impl.v:122: Warning: Identifier `\X431_73_ZN' is implicitly declared.
-impl.v:123: Warning: Identifier `\X8397_ZN' is implicitly declared.
-impl.v:123: Warning: Identifier `\X8271_ZN' is implicitly declared.
-impl.v:123: Warning: Identifier `\X8500_ZN' is implicitly declared.
-impl.v:124: Warning: Identifier `\X432_73_ZN' is implicitly declared.
-impl.v:125: Warning: Identifier `\X1889_ZN' is implicitly declared.
-impl.v:125: Warning: Identifier `\X8280_ZN' is implicitly declared.
-impl.v:126: Warning: Identifier `\X452_73_ZN' is implicitly declared.
-impl.v:127: Warning: Identifier `\X8403_ZN' is implicitly declared.
-impl.v:127: Warning: Identifier `\X8276_ZN' is implicitly declared.
-impl.v:127: Warning: Identifier `\X8519_ZN' is implicitly declared.
-impl.v:128: Warning: Identifier `\X461_73_ZN' is implicitly declared.
-impl.v:129: Warning: Identifier `\X8259_ZN' is implicitly declared.
-impl.v:129: Warning: Identifier `\X745_64_ZN' is implicitly declared.
-impl.v:132: Warning: Identifier `\X568_189_ZN' is implicitly declared.
-impl.v:133: Warning: Identifier `\X911_5_ZN' is implicitly declared.
-impl.v:134: Warning: Identifier `\X569_189_ZN' is implicitly declared.
-impl.v:136: Warning: Identifier `\X593_189_ZN' is implicitly declared.
-impl.v:139: Warning: Identifier `\X8352_ZN' is implicitly declared.
-impl.v:139: Warning: Identifier `\X622_5_ZN' is implicitly declared.
-impl.v:140: Warning: Identifier `\X623_5_ZN' is implicitly declared.
-impl.v:141: Warning: Identifier `\X661_189_ZN' is implicitly declared.
-impl.v:141: Warning: Identifier `\X8559_ZN' is implicitly declared.
-impl.v:142: Warning: Identifier `\X624_185_ZN' is implicitly declared.
-impl.v:143: Warning: Identifier `\X8347_ZN' is implicitly declared.
-impl.v:148: Warning: Identifier `\X8411_ZN' is implicitly declared.
-impl.v:148: Warning: Identifier `\X8549_ZN' is implicitly declared.
-impl.v:150: Warning: Identifier `\X8261_ZN' is implicitly declared.
-impl.v:150: Warning: Identifier `\X8522_ZN' is implicitly declared.
-impl.v:152: Warning: Identifier `\X8418_ZN' is implicitly declared.
-impl.v:152: Warning: Identifier `\X8258_ZN' is implicitly declared.
-impl.v:153: Warning: Identifier `\X634_207_ZN' is implicitly declared.
-impl.v:156: Warning: Identifier `\X8557_ZN' is implicitly declared.
-impl.v:157: Warning: Identifier `\X649_290_ZN' is implicitly declared.
-impl.v:158: Warning: Identifier `\X1797_Q' is implicitly declared.
-impl.v:158: Warning: Identifier `\X3510_ZN' is implicitly declared.
-impl.v:161: Warning: Identifier `\X684_189_ZN' is implicitly declared.
-impl.v:163: Warning: Identifier `\X688_189_ZN' is implicitly declared.
-impl.v:165: Warning: Identifier `\X703_103_Z' is implicitly declared.
-impl.v:171: Warning: Identifier `\X8351_ZN' is implicitly declared.
-impl.v:172: Warning: Identifier `\X8353_ZN' is implicitly declared.
-impl.v:173: Warning: Identifier `\X8349_ZN' is implicitly declared.
-impl.v:173: Warning: Identifier `\X751_5_ZN' is implicitly declared.
-impl.v:178: Warning: Identifier `\X3342_ZN' is implicitly declared.
-impl.v:179: Warning: Identifier `\X8354_ZN' is implicitly declared.
-impl.v:180: Warning: Identifier `\X8346_CO' is implicitly declared.
-impl.v:180: Warning: Identifier `\X1661_CO' is implicitly declared.
-impl.v:184: Warning: Identifier `\X8646_ZN' is implicitly declared.
-impl.v:186: Warning: Identifier `\X8644_ZN' is implicitly declared.
-impl.v:194: Warning: Identifier `\X8645_ZN' is implicitly declared.
-impl.v:196: Warning: Identifier `\X8647_ZN' is implicitly declared.
-impl.v:197: Warning: Identifier `\X1801_Q' is implicitly declared.
-impl.v:200: Warning: Identifier `\X8655_ZN' is implicitly declared.
-impl.v:201: Warning: Identifier `\X1803_Q' is implicitly declared.
-impl.v:206: Warning: Identifier `\X8648_ZN' is implicitly declared.
-impl.v:208: Warning: Identifier `\X8640_ZN' is implicitly declared.
-impl.v:210: Warning: Identifier `\X1890_Z' is implicitly declared.
-impl.v:210: Warning: Identifier `\X8621_Z' is implicitly declared.
-impl.v:212: Warning: Identifier `\X1891_CO' is implicitly declared.
-impl.v:214: Warning: Identifier `\X8637_CO' is implicitly declared.
-impl.v:218: Warning: Identifier `\X8634_CO' is implicitly declared.
-impl.v:221: Warning: Identifier `\X2503_Z' is implicitly declared.
-impl.v:223: Warning: Identifier `\X2504_Z' is implicitly declared.
-impl.v:225: Warning: Identifier `\X2505_Z' is implicitly declared.
-impl.v:227: Warning: Identifier `\X2506_Z' is implicitly declared.
-impl.v:232: Warning: Identifier `\X8627_CO' is implicitly declared.
-impl.v:235: Warning: Identifier `\X3384_Z' is implicitly declared.
-impl.v:236: Warning: Identifier `\X8405_ZN' is implicitly declared.
-impl.v:236: Warning: Identifier `\X8277_ZN' is implicitly declared.
-impl.v:236: Warning: Identifier `\X8511_ZN' is implicitly declared.
-impl.v:238: Warning: Identifier `\X8348_ZN' is implicitly declared.
-impl.v:239: Warning: Identifier `\X8355_ZN' is implicitly declared.
-impl.v:247: Warning: Identifier `\X8267_ZN' is implicitly declared.
-impl.v:248: Warning: Identifier `\X8631_CO' is implicitly declared.
-impl.v:249: Warning: Identifier `\X8269_ZN' is implicitly declared.
-impl.v:251: Warning: Identifier `\X8270_ZN' is implicitly declared.
-impl.v:255: Warning: Identifier `\X8274_ZN' is implicitly declared.
-impl.v:263: Warning: Identifier `\X8278_ZN' is implicitly declared.
-impl.v:268: Warning: Identifier `\X8340_CO' is implicitly declared.
-impl.v:269: Warning: Identifier `\X8294_Z' is implicitly declared.
-impl.v:270: Warning: Identifier `\X8330_CO' is implicitly declared.
-impl.v:275: Warning: Identifier `\X8341_SUM' is implicitly declared.
-impl.v:276: Warning: Identifier `\X8343_CO' is implicitly declared.
-impl.v:276: Warning: Identifier `\X8342_CO' is implicitly declared.
-impl.v:277: Warning: Identifier `\X8342_SUM' is implicitly declared.
-impl.v:280: Warning: Identifier `\X8344_CO' is implicitly declared.
-impl.v:281: Warning: Identifier `\X8344_SUM' is implicitly declared.
-impl.v:283: Warning: Identifier `\X8346_SUM' is implicitly declared.
-impl.v:294: Warning: Identifier `\X8629_CO' is implicitly declared.
-impl.v:298: Warning: Identifier `\X8632_CO' is implicitly declared.
-impl.v:304: Warning: Identifier `\X8613_Z' is implicitly declared.
-impl.v:304: Warning: Identifier `\X8615_Z' is implicitly declared.
-impl.v:306: Warning: Identifier `\X8614_Z' is implicitly declared.
-impl.v:308: Warning: Identifier `\X8630_CO' is implicitly declared.
-impl.v:309: Warning: Identifier `\X8409_ZN' is implicitly declared.
-impl.v:312: Warning: Identifier `\X8620_Z' is implicitly declared.
-impl.v:312: Warning: Identifier `\X8623_Z' is implicitly declared.
-impl.v:314: Warning: Identifier `\X8622_Z' is implicitly declared.
-impl.v:314: Warning: Identifier `\X8624_Z' is implicitly declared.
-impl.v:315: Warning: Identifier `\X8419_ZN' is implicitly declared.
-impl.v:319: Warning: Identifier `\X8510_ZN' is implicitly declared.
-impl.v:323: Warning: Identifier `\X8514_ZN' is implicitly declared.
-impl.v:324: Warning: Identifier `\X8515_ZN' is implicitly declared.
-impl.v:326: Warning: Identifier `\X8517_ZN' is implicitly declared.
-impl.v:334: Warning: Identifier `\X8527_ZN' is implicitly declared.
-impl.v:335: Warning: Identifier `\X8531_ZN' is implicitly declared.
-impl.v:337: Warning: Identifier `\X8543_ZN' is implicitly declared.
-impl.v:357: Warning: Identifier `\X8635_CO' is implicitly declared.
-impl.v:365: Warning: Identifier `\X8626_CO' is implicitly declared.
-impl.v:373: Warning: Identifier `\X8628_CO' is implicitly declared.
+COUNT_12BX2/impl.v:45: Warning: Identifier `\X421_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:45: Warning: Identifier `\X0_1625_Q' is implicitly declared.
+COUNT_12BX2/impl.v:47: Warning: Identifier `\X467_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:47: Warning: Identifier `\X0_1626_Q' is implicitly declared.
+COUNT_12BX2/impl.v:49: Warning: Identifier `\X409_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:49: Warning: Identifier `\X1804_Q' is implicitly declared.
+COUNT_12BX2/impl.v:51: Warning: Identifier `\X633_207_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:52: Warning: Identifier `\X1713_Q' is implicitly declared.
+COUNT_12BX2/impl.v:52: Warning: Identifier `\X0_1715_Q' is implicitly declared.
+COUNT_12BX2/impl.v:53: Warning: Identifier `\X4_6_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:54: Warning: Identifier `\X8330_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:54: Warning: Identifier `\X748_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:54: Warning: Identifier `\X746_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:56: Warning: Identifier `\X28_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:56: Warning: Identifier `\X63_1886_Q' is implicitly declared.
+COUNT_12BX2/impl.v:56: Warning: Identifier `\X24_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:58: Warning: Identifier `\X72_330_CO' is implicitly declared.
+COUNT_12BX2/impl.v:58: Warning: Identifier `\X25_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:60: Warning: Identifier `\X57_10_Q' is implicitly declared.
+COUNT_12BX2/impl.v:60: Warning: Identifier `\X3383_CO' is implicitly declared.
+COUNT_12BX2/impl.v:60: Warning: Identifier `\X26_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:62: Warning: Identifier `\X630_103_Z' is implicitly declared.
+COUNT_12BX2/impl.v:62: Warning: Identifier `\X27_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:64: Warning: Identifier `\X32_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:64: Warning: Identifier `\X1712_Q' is implicitly declared.
+COUNT_12BX2/impl.v:66: Warning: Identifier `\X72_330_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:66: Warning: Identifier `\X3484_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:66: Warning: Identifier `\X29_85_CO' is implicitly declared.
+COUNT_12BX2/impl.v:67: Warning: Identifier `\X29_85_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:69: Warning: Identifier `\X30_6_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:70: Warning: Identifier `\X1796_Q' is implicitly declared.
+COUNT_12BX2/impl.v:70: Warning: Identifier `\X8636_CO' is implicitly declared.
+COUNT_12BX2/impl.v:70: Warning: Identifier `\X30_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:72: Warning: Identifier `\X8625_CO' is implicitly declared.
+COUNT_12BX2/impl.v:72: Warning: Identifier `\X31_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:74: Warning: Identifier `\X2492_CO' is implicitly declared.
+COUNT_12BX2/impl.v:74: Warning: Identifier `\X430_309_Q' is implicitly declared.
+COUNT_12BX2/impl.v:76: Warning: Identifier `\X8633_CO' is implicitly declared.
+COUNT_12BX2/impl.v:76: Warning: Identifier `\X1806_Q' is implicitly declared.
+COUNT_12BX2/impl.v:76: Warning: Identifier `\X33_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:78: Warning: Identifier `\X8638_CO' is implicitly declared.
+COUNT_12BX2/impl.v:78: Warning: Identifier `\X36_263_CO' is implicitly declared.
+COUNT_12BX2/impl.v:80: Warning: Identifier `\X8341_CO' is implicitly declared.
+COUNT_12BX2/impl.v:80: Warning: Identifier `\X59_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:80: Warning: Identifier `\X38_85_CO' is implicitly declared.
+COUNT_12BX2/impl.v:81: Warning: Identifier `\X38_85_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:82: Warning: Identifier `\X1795_Q' is implicitly declared.
+COUNT_12BX2/impl.v:82: Warning: Identifier `\X1798_Q' is implicitly declared.
+COUNT_12BX2/impl.v:82: Warning: Identifier `\X46_344_CO' is implicitly declared.
+COUNT_12BX2/impl.v:84: Warning: Identifier `\X1892_CO' is implicitly declared.
+COUNT_12BX2/impl.v:84: Warning: Identifier `\X1849_Q' is implicitly declared.
+COUNT_12BX2/impl.v:84: Warning: Identifier `\X47_344_CO' is implicitly declared.
+COUNT_12BX2/impl.v:86: Warning: Identifier `\X8641_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:88: Warning: Identifier `\X8350_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:89: Warning: Identifier `\X3385_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:91: Warning: Identifier `\X1802_Q' is implicitly declared.
+COUNT_12BX2/impl.v:92: Warning: Identifier `\X72_6_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:93: Warning: Identifier `\X1805_Q' is implicitly declared.
+COUNT_12BX2/impl.v:95: Warning: Identifier `\X8616_Z' is implicitly declared.
+COUNT_12BX2/impl.v:95: Warning: Identifier `\X8619_Z' is implicitly declared.
+COUNT_12BX2/impl.v:96: Warning: Identifier `\X154_21_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:97: Warning: Identifier `\X8343_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:97: Warning: Identifier `\X747_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:99: Warning: Identifier `\X1661_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:99: Warning: Identifier `\X625_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:102: Warning: Identifier `\X212_6_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:103: Warning: Identifier `\X8617_Z' is implicitly declared.
+COUNT_12BX2/impl.v:103: Warning: Identifier `\X8618_Z' is implicitly declared.
+COUNT_12BX2/impl.v:104: Warning: Identifier `\X214_21_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:105: Warning: Identifier `\X422_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:106: Warning: Identifier `\X351_44_Q' is implicitly declared.
+COUNT_12BX2/impl.v:107: Warning: Identifier `\X8279_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:109: Warning: Identifier `\X8340_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:109: Warning: Identifier `\X1033_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:111: Warning: Identifier `\X421_Z' is implicitly declared.
+COUNT_12BX2/impl.v:111: Warning: Identifier `\X3382_Z' is implicitly declared.
+COUNT_12BX2/impl.v:112: Warning: Identifier `\X420_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:115: Warning: Identifier `\X605_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:115: Warning: Identifier `\X636_64_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:117: Warning: Identifier `\X8275_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:117: Warning: Identifier `\X8526_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:119: Warning: Identifier `\X632_207_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:121: Warning: Identifier `\X630_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:121: Warning: Identifier `\X744_64_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:122: Warning: Identifier `\X431_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:123: Warning: Identifier `\X8397_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:123: Warning: Identifier `\X8271_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:123: Warning: Identifier `\X8500_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:124: Warning: Identifier `\X432_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:125: Warning: Identifier `\X1889_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:125: Warning: Identifier `\X8280_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:126: Warning: Identifier `\X452_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:127: Warning: Identifier `\X8403_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:127: Warning: Identifier `\X8276_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:127: Warning: Identifier `\X8519_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:128: Warning: Identifier `\X461_73_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:129: Warning: Identifier `\X8259_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:129: Warning: Identifier `\X745_64_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:132: Warning: Identifier `\X568_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:133: Warning: Identifier `\X911_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:134: Warning: Identifier `\X569_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:136: Warning: Identifier `\X593_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:139: Warning: Identifier `\X8352_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:139: Warning: Identifier `\X622_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:140: Warning: Identifier `\X623_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:141: Warning: Identifier `\X661_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:141: Warning: Identifier `\X8559_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:142: Warning: Identifier `\X624_185_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:143: Warning: Identifier `\X8347_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:148: Warning: Identifier `\X8411_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:148: Warning: Identifier `\X8549_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:150: Warning: Identifier `\X8261_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:150: Warning: Identifier `\X8522_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:152: Warning: Identifier `\X8418_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:152: Warning: Identifier `\X8258_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:153: Warning: Identifier `\X634_207_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:156: Warning: Identifier `\X8557_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:157: Warning: Identifier `\X649_290_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:158: Warning: Identifier `\X1797_Q' is implicitly declared.
+COUNT_12BX2/impl.v:158: Warning: Identifier `\X3510_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:161: Warning: Identifier `\X684_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:163: Warning: Identifier `\X688_189_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:165: Warning: Identifier `\X703_103_Z' is implicitly declared.
+COUNT_12BX2/impl.v:171: Warning: Identifier `\X8351_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:172: Warning: Identifier `\X8353_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:173: Warning: Identifier `\X8349_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:173: Warning: Identifier `\X751_5_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:178: Warning: Identifier `\X3342_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:179: Warning: Identifier `\X8354_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:180: Warning: Identifier `\X8346_CO' is implicitly declared.
+COUNT_12BX2/impl.v:180: Warning: Identifier `\X1661_CO' is implicitly declared.
+COUNT_12BX2/impl.v:184: Warning: Identifier `\X8646_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:186: Warning: Identifier `\X8644_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:194: Warning: Identifier `\X8645_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:196: Warning: Identifier `\X8647_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:197: Warning: Identifier `\X1801_Q' is implicitly declared.
+COUNT_12BX2/impl.v:200: Warning: Identifier `\X8655_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:201: Warning: Identifier `\X1803_Q' is implicitly declared.
+COUNT_12BX2/impl.v:206: Warning: Identifier `\X8648_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:208: Warning: Identifier `\X8640_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:210: Warning: Identifier `\X1890_Z' is implicitly declared.
+COUNT_12BX2/impl.v:210: Warning: Identifier `\X8621_Z' is implicitly declared.
+COUNT_12BX2/impl.v:212: Warning: Identifier `\X1891_CO' is implicitly declared.
+COUNT_12BX2/impl.v:214: Warning: Identifier `\X8637_CO' is implicitly declared.
+COUNT_12BX2/impl.v:218: Warning: Identifier `\X8634_CO' is implicitly declared.
+COUNT_12BX2/impl.v:221: Warning: Identifier `\X2503_Z' is implicitly declared.
+COUNT_12BX2/impl.v:223: Warning: Identifier `\X2504_Z' is implicitly declared.
+COUNT_12BX2/impl.v:225: Warning: Identifier `\X2505_Z' is implicitly declared.
+COUNT_12BX2/impl.v:227: Warning: Identifier `\X2506_Z' is implicitly declared.
+COUNT_12BX2/impl.v:232: Warning: Identifier `\X8627_CO' is implicitly declared.
+COUNT_12BX2/impl.v:235: Warning: Identifier `\X3384_Z' is implicitly declared.
+COUNT_12BX2/impl.v:236: Warning: Identifier `\X8405_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:236: Warning: Identifier `\X8277_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:236: Warning: Identifier `\X8511_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:238: Warning: Identifier `\X8348_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:239: Warning: Identifier `\X8355_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:247: Warning: Identifier `\X8267_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:248: Warning: Identifier `\X8631_CO' is implicitly declared.
+COUNT_12BX2/impl.v:249: Warning: Identifier `\X8269_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:251: Warning: Identifier `\X8270_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:255: Warning: Identifier `\X8274_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:263: Warning: Identifier `\X8278_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:268: Warning: Identifier `\X8340_CO' is implicitly declared.
+COUNT_12BX2/impl.v:269: Warning: Identifier `\X8294_Z' is implicitly declared.
+COUNT_12BX2/impl.v:270: Warning: Identifier `\X8330_CO' is implicitly declared.
+COUNT_12BX2/impl.v:275: Warning: Identifier `\X8341_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:276: Warning: Identifier `\X8343_CO' is implicitly declared.
+COUNT_12BX2/impl.v:276: Warning: Identifier `\X8342_CO' is implicitly declared.
+COUNT_12BX2/impl.v:277: Warning: Identifier `\X8342_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:280: Warning: Identifier `\X8344_CO' is implicitly declared.
+COUNT_12BX2/impl.v:281: Warning: Identifier `\X8344_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:283: Warning: Identifier `\X8346_SUM' is implicitly declared.
+COUNT_12BX2/impl.v:294: Warning: Identifier `\X8629_CO' is implicitly declared.
+COUNT_12BX2/impl.v:298: Warning: Identifier `\X8632_CO' is implicitly declared.
+COUNT_12BX2/impl.v:304: Warning: Identifier `\X8613_Z' is implicitly declared.
+COUNT_12BX2/impl.v:304: Warning: Identifier `\X8615_Z' is implicitly declared.
+COUNT_12BX2/impl.v:306: Warning: Identifier `\X8614_Z' is implicitly declared.
+COUNT_12BX2/impl.v:308: Warning: Identifier `\X8630_CO' is implicitly declared.
+COUNT_12BX2/impl.v:309: Warning: Identifier `\X8409_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:312: Warning: Identifier `\X8620_Z' is implicitly declared.
+COUNT_12BX2/impl.v:312: Warning: Identifier `\X8623_Z' is implicitly declared.
+COUNT_12BX2/impl.v:314: Warning: Identifier `\X8622_Z' is implicitly declared.
+COUNT_12BX2/impl.v:314: Warning: Identifier `\X8624_Z' is implicitly declared.
+COUNT_12BX2/impl.v:315: Warning: Identifier `\X8419_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:319: Warning: Identifier `\X8510_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:323: Warning: Identifier `\X8514_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:324: Warning: Identifier `\X8515_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:326: Warning: Identifier `\X8517_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:334: Warning: Identifier `\X8527_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:335: Warning: Identifier `\X8531_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:337: Warning: Identifier `\X8543_ZN' is implicitly declared.
+COUNT_12BX2/impl.v:357: Warning: Identifier `\X8635_CO' is implicitly declared.
+COUNT_12BX2/impl.v:365: Warning: Identifier `\X8626_CO' is implicitly declared.
+COUNT_12BX2/impl.v:373: Warning: Identifier `\X8628_CO' is implicitly declared.
 Successfully finished Verilog frontend.
 
 3. Executing PREP pass.
@@ -529,26 +529,26 @@ Removed 117 unused modules.
 Cleaned up 0 empty switches.
 
 3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
-Marked 1 switch rules as full_case in process $proc$SC_LIB_SCH.v:1203$121 in module SC_MFC_140_80.
+Marked 1 switch rules as full_case in process $proc$COUNT_12BX2/SC_LIB_SCH.v:1203$121 in module SC_MFC_140_80.
 Removed a total of 0 dead cases.
 
 3.2.3. Executing PROC_INIT pass (extract init attributes).
 
 3.2.4. Executing PROC_ARST pass (detect async resets in processes).
-Found async reset \CDN in `\SC_MFC_140_80.$proc$SC_LIB_SCH.v:1203$121'.
+Found async reset \CDN in `\SC_MFC_140_80.$proc$COUNT_12BX2/SC_LIB_SCH.v:1203$121'.
 
 3.2.5. Executing PROC_MUX pass (convert decision trees to multiplexers).
-Creating decoders for process `\SC_MFC_140_80.$proc$SC_LIB_SCH.v:1203$121'.
+Creating decoders for process `\SC_MFC_140_80.$proc$COUNT_12BX2/SC_LIB_SCH.v:1203$121'.
      1/1: $0\Q_reg[0:0]
 
 3.2.6. Executing PROC_DLATCH pass (convert process syncs to latches).
 
 3.2.7. Executing PROC_DFF pass (convert process syncs to FFs).
-Creating register for signal `\SC_MFC_140_80.\Q_reg' using process `\SC_MFC_140_80.$proc$SC_LIB_SCH.v:1203$121'.
+Creating register for signal `\SC_MFC_140_80.\Q_reg' using process `\SC_MFC_140_80.$proc$COUNT_12BX2/SC_LIB_SCH.v:1203$121'.
   created $adff cell `$procdff$328' with positive edge clock and negative level reset.
 
 3.2.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
-Removing empty process `SC_MFC_140_80.$proc$SC_LIB_SCH.v:1203$121'.
+Removing empty process `SC_MFC_140_80.$proc$COUNT_12BX2/SC_LIB_SCH.v:1203$121'.
 Cleaned up 0 empty switches.
 
 3.3. Executing OPT_EXPR pass (perform const folding).
@@ -1132,8 +1132,8 @@ Replacing COUNT_12BX2.$techmap\X430_309.$procdff$328 ($adff): ARST=\X430_309.CDN
 Replacing COUNT_12BX2.$techmap\X1712.$procdff$328 ($adff): ARST=\X1712.CDN, D=\X1712.D, Q=\X1712.Q_reg
 Replacing COUNT_12BX2.$techmap\X1800.$procdff$328 ($adff): ARST=\X1800.CDN, D=\X1800.D, Q=\X1800.Q_reg
 
-6. Executing Verilog-2005 frontend: SC_LIB_SCH.v
-Parsing Verilog input from `SC_LIB_SCH.v' to AST representation.
+6. Executing Verilog-2005 frontend: COUNT_12BX2/SC_LIB_SCH.v
+Parsing Verilog input from `COUNT_12BX2/SC_LIB_SCH.v' to AST representation.
 Generating RTLIL representation for module `\SC_AND2B2_140_90D2'.
 Generating RTLIL representation for module `\SC_AND2B2_140_90D4'.
 Generating RTLIL representation for module `\SC_AND2_50_30'.
@@ -1181,7 +1181,7 @@ Generating RTLIL representation for module `\SC_DFB_140_90'.
 Generating RTLIL representation for module `\SC_DFC_140_90'.
 Generating RTLIL representation for module `\SC_DFS_140_90'.
 Generating RTLIL representation for module `\SC_FNCLOCKGATING_140_80'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:885 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:885 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_HADD_140_80'.
@@ -1195,15 +1195,15 @@ Generating RTLIL representation for module `\SC_INV_140_100D2'.
 Generating RTLIL representation for module `\SC_INV_140_100D3'.
 Generating RTLIL representation for module `\SC_INV_140_100D4'.
 Generating RTLIL representation for module `\SC_LAC_140_80'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:1073 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:1073 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_LAC_140_80S1'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:1101 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:1101 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_LAS_140_80'.
-Note: Assuming pure combinatorial block at SC_LIB_SCH.v:1129 in
+Note: Assuming pure combinatorial block at COUNT_12BX2/SC_LIB_SCH.v:1129 in
 compliance with IEC 62142(E):2005 / IEEE Std. 1364.1(E):2002. Recommending
 use of @* instead of @(...) for better match of synthesis and simulation.
 Generating RTLIL representation for module `\SC_MFB_140_80'.
@@ -1278,9 +1278,183 @@ Generating RTLIL representation for module `\SC_XOR2_E120_70'.
 Generating RTLIL representation for module `\SC_XOR3_E140_90'.
 Successfully finished Verilog frontend.
 
-7. Executing Verilog-2005 frontend: spec_structural.v
-Parsing Verilog input from `spec_structural.v' to AST representation.
+7. Executing Verilog-2005 frontend: /home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v
+Parsing Verilog input from `/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v' to AST representation.
 Generating RTLIL representation for module `\COUNT_12BX2_spec'.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:72: Warning: Identifier `\X4_6_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:73: Warning: Identifier `\X748_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:73: Warning: Identifier `\X746_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:73: Warning: Identifier `\X8330_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:74: Warning: Identifier `\X24_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:74: Warning: Identifier `\X28_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:75: Warning: Identifier `\X25_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:75: Warning: Identifier `\X72_330_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:76: Warning: Identifier `\X26_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:76: Warning: Identifier `\X3383_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:77: Warning: Identifier `\X27_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:77: Warning: Identifier `\X630_103_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:78: Warning: Identifier `\X32_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:79: Warning: Identifier `\X29_85_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:79: Warning: Identifier `\X72_330_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:79: Warning: Identifier `\X3484_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:80: Warning: Identifier `\X29_85_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:81: Warning: Identifier `\X30_6_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:82: Warning: Identifier `\X30_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:82: Warning: Identifier `\X8636_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:83: Warning: Identifier `\X31_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:83: Warning: Identifier `\X8625_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:84: Warning: Identifier `\X2492_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:85: Warning: Identifier `\X33_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:85: Warning: Identifier `\X8633_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:86: Warning: Identifier `\X36_263_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:86: Warning: Identifier `\X8638_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:87: Warning: Identifier `\X38_85_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:87: Warning: Identifier `\X8341_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:87: Warning: Identifier `\X59_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:88: Warning: Identifier `\X38_85_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:89: Warning: Identifier `\X46_344_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:90: Warning: Identifier `\X47_344_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:90: Warning: Identifier `\X1892_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:91: Warning: Identifier `\X8350_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:92: Warning: Identifier `\X72_6_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:95: Warning: Identifier `\X154_21_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:95: Warning: Identifier `\X8616_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:95: Warning: Identifier `\X8619_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:96: Warning: Identifier `\X747_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:96: Warning: Identifier `\X8343_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:97: Warning: Identifier `\X625_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:97: Warning: Identifier `\X1661_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:98: Warning: Identifier `\X212_6_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:99: Warning: Identifier `\X214_21_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:99: Warning: Identifier `\X8617_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:99: Warning: Identifier `\X8618_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:100: Warning: Identifier `\X409_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:100: Warning: Identifier `\X8279_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:101: Warning: Identifier `\X1033_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:101: Warning: Identifier `\X8340_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:102: Warning: Identifier `\X420_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:102: Warning: Identifier `\X421_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:102: Warning: Identifier `\X3382_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:104: Warning: Identifier `\X421_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:104: Warning: Identifier `\X605_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:104: Warning: Identifier `\X636_64_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:105: Warning: Identifier `\X422_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:105: Warning: Identifier `\X8275_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:105: Warning: Identifier `\X8526_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:106: Warning: Identifier `\X431_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:106: Warning: Identifier `\X630_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:106: Warning: Identifier `\X744_64_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:107: Warning: Identifier `\X432_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:107: Warning: Identifier `\X8271_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:107: Warning: Identifier `\X8500_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:107: Warning: Identifier `\X8397_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:108: Warning: Identifier `\X452_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:108: Warning: Identifier `\X8280_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:108: Warning: Identifier `\X1889_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:109: Warning: Identifier `\X461_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:109: Warning: Identifier `\X8276_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:109: Warning: Identifier `\X8519_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:109: Warning: Identifier `\X8403_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:110: Warning: Identifier `\X467_73_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:110: Warning: Identifier `\X8259_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:110: Warning: Identifier `\X745_64_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:111: Warning: Identifier `\X568_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:112: Warning: Identifier `\X569_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:112: Warning: Identifier `\X911_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:113: Warning: Identifier `\X593_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:115: Warning: Identifier `\X622_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:115: Warning: Identifier `\X8352_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:116: Warning: Identifier `\X623_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:117: Warning: Identifier `\X624_185_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:117: Warning: Identifier `\X661_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:117: Warning: Identifier `\X8559_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:118: Warning: Identifier `\X8347_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:121: Warning: Identifier `\X632_207_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:121: Warning: Identifier `\X8549_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:121: Warning: Identifier `\X8411_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:122: Warning: Identifier `\X633_207_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:122: Warning: Identifier `\X8261_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:122: Warning: Identifier `\X8522_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:123: Warning: Identifier `\X634_207_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:123: Warning: Identifier `\X8258_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:123: Warning: Identifier `\X8418_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:125: Warning: Identifier `\X649_290_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:125: Warning: Identifier `\X8557_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:126: Warning: Identifier `\X3510_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:127: Warning: Identifier `\X684_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:128: Warning: Identifier `\X688_189_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:129: Warning: Identifier `\X703_103_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:133: Warning: Identifier `\X8351_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:134: Warning: Identifier `\X8353_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:135: Warning: Identifier `\X751_5_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:135: Warning: Identifier `\X8349_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:138: Warning: Identifier `\X3342_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:139: Warning: Identifier `\X8354_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:140: Warning: Identifier `\X8346_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:141: Warning: Identifier `\X1661_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:142: Warning: Identifier `\X1890_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:142: Warning: Identifier `\X8621_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:143: Warning: Identifier `\X1891_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:144: Warning: Identifier `\X8637_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:146: Warning: Identifier `\X8634_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:147: Warning: Identifier `\X2503_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:148: Warning: Identifier `\X2504_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:149: Warning: Identifier `\X2505_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:150: Warning: Identifier `\X2506_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:153: Warning: Identifier `\X8627_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:154: Warning: Identifier `\X3384_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:155: Warning: Identifier `\X3385_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:155: Warning: Identifier `\X8277_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:155: Warning: Identifier `\X8511_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:155: Warning: Identifier `\X8405_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:156: Warning: Identifier `\X8348_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:157: Warning: Identifier `\X8355_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:161: Warning: Identifier `\X8267_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:162: Warning: Identifier `\X8269_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:162: Warning: Identifier `\X8631_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:163: Warning: Identifier `\X8270_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:165: Warning: Identifier `\X8274_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:169: Warning: Identifier `\X8278_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:172: Warning: Identifier `\X8294_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:172: Warning: Identifier `\X8340_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:174: Warning: Identifier `\X8330_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:177: Warning: Identifier `\X8341_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:179: Warning: Identifier `\X8342_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:179: Warning: Identifier `\X8343_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:180: Warning: Identifier `\X8342_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:183: Warning: Identifier `\X8344_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:184: Warning: Identifier `\X8344_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:185: Warning: Identifier `\X8346_SUM' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:192: Warning: Identifier `\X8629_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:194: Warning: Identifier `\X8632_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:197: Warning: Identifier `\X8613_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:197: Warning: Identifier `\X8615_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:198: Warning: Identifier `\X8614_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:199: Warning: Identifier `\X8409_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:199: Warning: Identifier `\X8630_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:201: Warning: Identifier `\X8620_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:201: Warning: Identifier `\X8623_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:202: Warning: Identifier `\X8419_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:202: Warning: Identifier `\X8622_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:202: Warning: Identifier `\X8624_Z' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:204: Warning: Identifier `\X8510_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:206: Warning: Identifier `\X8514_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:207: Warning: Identifier `\X8515_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:208: Warning: Identifier `\X8517_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:212: Warning: Identifier `\X8527_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:213: Warning: Identifier `\X8531_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:214: Warning: Identifier `\X8543_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:225: Warning: Identifier `\X8635_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:229: Warning: Identifier `\X8626_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:233: Warning: Identifier `\X8628_CO' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:249: Warning: Identifier `\X8640_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:250: Warning: Identifier `\X8641_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:251: Warning: Identifier `\X8644_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:252: Warning: Identifier `\X8645_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:253: Warning: Identifier `\X8646_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:254: Warning: Identifier `\X8647_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:255: Warning: Identifier `\X8648_ZN' is implicitly declared.
+/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:256: Warning: Identifier `\X8655_ZN' is implicitly declared.
 Successfully finished Verilog frontend.
 
 8. Executing PREP pass.
@@ -1430,105 +1604,173 @@ Removed 130 unused modules.
 Cleaned up 0 empty switches.
 
 8.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
-Marked 1 switch rules as full_case in process $proc$spec_structural.v:494$1326 in module COUNT_12BX2_spec.
-Marked 1 switch rules as full_case in process $proc$spec_structural.v:469$1315 in module COUNT_12BX2_spec.
-Marked 1 switch rules as full_case in process $proc$spec_structural.v:460$1312 in module COUNT_12BX2_spec.
-Marked 1 switch rules as full_case in process $proc$spec_structural.v:443$1305 in module COUNT_12BX2_spec.
-Marked 1 switch rules as full_case in process $proc$spec_structural.v:426$1298 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:343$1361 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:339$1358 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:335$1355 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:331$1352 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:327$1349 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:323$1346 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:319$1343 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:315$1340 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:311$1337 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:307$1334 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:303$1331 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:299$1328 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:295$1325 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:291$1322 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:287$1319 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:283$1316 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:279$1313 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:275$1310 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:271$1307 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:267$1304 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:263$1301 in module COUNT_12BX2_spec.
+Marked 1 switch rules as full_case in process $proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:259$1298 in module COUNT_12BX2_spec.
 Removed a total of 0 dead cases.
 
 8.2.3. Executing PROC_INIT pass (extract init attributes).
 
 8.2.4. Executing PROC_ARST pass (detect async resets in processes).
-Found async reset \X1676_Z in `\COUNT_12BX2_spec.$proc$spec_structural.v:494$1326'.
-Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-Found async reset \X1676_Z in `\COUNT_12BX2_spec.$proc$spec_structural.v:460$1312'.
-Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:343$1361'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:339$1358'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:335$1355'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:331$1352'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:327$1349'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:323$1346'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:319$1343'.
+Found async reset \X1676_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:315$1340'.
+Found async reset \X1676_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:311$1337'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:307$1334'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:303$1331'.
+Found async reset \X1676_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:299$1328'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:295$1325'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:291$1322'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:287$1319'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:283$1316'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:279$1313'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:275$1310'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:271$1307'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:267$1304'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:263$1301'.
+Found async reset \X3_323_Z in `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:259$1298'.
 
 8.2.5. Executing PROC_MUX pass (convert decision trees to multiplexers).
-Creating decoders for process `\COUNT_12BX2_spec.$proc$spec_structural.v:494$1326'.
-     1/2: $0\X1798_Q[0:0]
-     2/2: $0\X1795_Q[0:0]
-Creating decoders for process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-     1/9: $0\X1797_Q[0:0]
-     2/9: $0\X351_44_Q[0:0]
-     3/9: $0\X430_309_Q[0:0]
-     4/9: $0\X1796_Q[0:0]
-     5/9: $0\X1712_Q[0:0]
-     6/9: $0\X57_10_Q[0:0]
-     7/9: $0\X63_1886_Q[0:0]
-     8/9: $0\X0_1715_Q[0:0]
-     9/9: $0\X1713_Q[0:0]
-Creating decoders for process `\COUNT_12BX2_spec.$proc$spec_structural.v:460$1312'.
-     1/1: $0\mi1_qt1_r[0:0]
-Creating decoders for process `\COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-     1/5: $0\X1803_Q[0:0]
-     2/5: $0\X1801_Q[0:0]
-     3/5: $0\X1802_Q[0:0]
-     4/5: $0\X1849_Q[0:0]
-     5/5: $0\X1804_Q[0:0]
-Creating decoders for process `\COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
-     1/5: $0\mi1_qt0_r[0:0]
-     2/5: $0\X1805_Q[0:0]
-     3/5: $0\X1806_Q[0:0]
-     4/5: $0\X0_1626_Q[0:0]
-     5/5: $0\X0_1625_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:343$1361'.
+     1/1: $0\X1849_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:339$1358'.
+     1/1: $0\X1806_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:335$1355'.
+     1/1: $0\X1805_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:331$1352'.
+     1/1: $0\X1804_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:327$1349'.
+     1/1: $0\X1803_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:323$1346'.
+     1/1: $0\X1802_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:319$1343'.
+     1/1: $0\X1801_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:315$1340'.
+     1/1: $0\r_MI1_QT_1[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:311$1337'.
+     1/1: $0\X1798_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:307$1334'.
+     1/1: $0\X1797_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:303$1331'.
+     1/1: $0\X1796_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:299$1328'.
+     1/1: $0\X1795_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:295$1325'.
+     1/1: $0\X1713_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:291$1322'.
+     1/1: $0\X1712_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:287$1319'.
+     1/1: $0\X430_309_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:283$1316'.
+     1/1: $0\X351_44_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:279$1313'.
+     1/1: $0\X63_1886_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:275$1310'.
+     1/1: $0\X57_10_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:271$1307'.
+     1/1: $0\X0_1715_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:267$1304'.
+     1/1: $0\X0_1626_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:263$1301'.
+     1/1: $0\X0_1625_Q[0:0]
+Creating decoders for process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:259$1298'.
+     1/1: $0\r_MI1_QT_0[0:0]
 
 8.2.6. Executing PROC_DLATCH pass (convert process syncs to latches).
 
 8.2.7. Executing PROC_DFF pass (convert process syncs to FFs).
-Creating register for signal `\COUNT_12BX2_spec.\X1795_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:494$1326'.
-  created $adff cell `$procdff$1330' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1798_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:494$1326'.
-  created $adff cell `$procdff$1331' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1713_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1332' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X0_1715_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1333' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X63_1886_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1334' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X57_10_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1335' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1712_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1336' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1796_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1337' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X430_309_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1338' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X351_44_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1339' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1797_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-  created $adff cell `$procdff$1340' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\mi1_qt1_r' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:460$1312'.
-  created $adff cell `$procdff$1341' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1804_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-  created $adff cell `$procdff$1342' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1849_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-  created $adff cell `$procdff$1343' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1802_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-  created $adff cell `$procdff$1344' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1801_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-  created $adff cell `$procdff$1345' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1803_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-  created $adff cell `$procdff$1346' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X0_1625_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
-  created $adff cell `$procdff$1347' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X0_1626_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
-  created $adff cell `$procdff$1348' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1806_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
-  created $adff cell `$procdff$1349' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\X1805_Q' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
-  created $adff cell `$procdff$1350' with positive edge clock and negative level reset.
-Creating register for signal `\COUNT_12BX2_spec.\mi1_qt0_r' using process `\COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
-  created $adff cell `$procdff$1351' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1849_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:343$1361'.
+  created $adff cell `$procdff$1364' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1806_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:339$1358'.
+  created $adff cell `$procdff$1365' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1805_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:335$1355'.
+  created $adff cell `$procdff$1366' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1804_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:331$1352'.
+  created $adff cell `$procdff$1367' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1803_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:327$1349'.
+  created $adff cell `$procdff$1368' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1802_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:323$1346'.
+  created $adff cell `$procdff$1369' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1801_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:319$1343'.
+  created $adff cell `$procdff$1370' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\r_MI1_QT_1' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:315$1340'.
+  created $adff cell `$procdff$1371' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1798_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:311$1337'.
+  created $adff cell `$procdff$1372' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1797_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:307$1334'.
+  created $adff cell `$procdff$1373' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1796_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:303$1331'.
+  created $adff cell `$procdff$1374' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1795_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:299$1328'.
+  created $adff cell `$procdff$1375' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1713_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:295$1325'.
+  created $adff cell `$procdff$1376' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X1712_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:291$1322'.
+  created $adff cell `$procdff$1377' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X430_309_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:287$1319'.
+  created $adff cell `$procdff$1378' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X351_44_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:283$1316'.
+  created $adff cell `$procdff$1379' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X63_1886_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:279$1313'.
+  created $adff cell `$procdff$1380' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X57_10_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:275$1310'.
+  created $adff cell `$procdff$1381' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X0_1715_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:271$1307'.
+  created $adff cell `$procdff$1382' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X0_1626_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:267$1304'.
+  created $adff cell `$procdff$1383' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\X0_1625_Q' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:263$1301'.
+  created $adff cell `$procdff$1384' with positive edge clock and negative level reset.
+Creating register for signal `\COUNT_12BX2_spec.\r_MI1_QT_0' using process `\COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:259$1298'.
+  created $adff cell `$procdff$1385' with positive edge clock and negative level reset.
 
 8.2.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
-Removing empty process `COUNT_12BX2_spec.$proc$spec_structural.v:494$1326'.
-Removing empty process `COUNT_12BX2_spec.$proc$spec_structural.v:469$1315'.
-Removing empty process `COUNT_12BX2_spec.$proc$spec_structural.v:460$1312'.
-Removing empty process `COUNT_12BX2_spec.$proc$spec_structural.v:443$1305'.
-Removing empty process `COUNT_12BX2_spec.$proc$spec_structural.v:426$1298'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:343$1361'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:339$1358'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:335$1355'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:331$1352'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:327$1349'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:323$1346'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:319$1343'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:315$1340'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:311$1337'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:307$1334'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:303$1331'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:299$1328'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:295$1325'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:291$1322'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:287$1319'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:283$1316'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:279$1313'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:275$1310'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:271$1307'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:267$1304'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:263$1301'.
+Removing empty process `COUNT_12BX2_spec.$proc$/home/wsl2/formal/RE-Agent/COUNT_12BX2/spec_structural.v:259$1298'.
 Cleaned up 0 empty switches.
 
 8.3. Executing OPT_EXPR pass (perform const folding).
@@ -1537,8 +1779,8 @@ Optimizing module COUNT_12BX2_spec.
 
 8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \COUNT_12BX2_spec..
-Removed 15 unused cells and 232 unused wires.
-<suppressed ~26 debug messages>
+Removed 32 unused cells and 249 unused wires.
+<suppressed ~43 debug messages>
 
 8.5. Executing CHECK pass (checking for obvious problems).
 checking module COUNT_12BX2_spec..
@@ -1631,28 +1873,28 @@ found and reported 0 problems.
 No more expansions possible.
 
 10. Executing ASYNC2SYNC pass.
-Replacing COUNT_12BX2_spec.$procdff$1330 ($adff): ARST=\X1676_Z, D=$0\X1795_Q[0:0], Q=\X1795_Q
-Replacing COUNT_12BX2_spec.$procdff$1331 ($adff): ARST=\X1676_Z, D=$0\X1798_Q[0:0], Q=\X1798_Q
-Replacing COUNT_12BX2_spec.$procdff$1332 ($adff): ARST=\X3_323_Z, D=$0\X1713_Q[0:0], Q=\X1713_Q
-Replacing COUNT_12BX2_spec.$procdff$1333 ($adff): ARST=\X3_323_Z, D=$0\X0_1715_Q[0:0], Q=\X0_1715_Q
-Replacing COUNT_12BX2_spec.$procdff$1334 ($adff): ARST=\X3_323_Z, D=$0\X63_1886_Q[0:0], Q=\X63_1886_Q
-Replacing COUNT_12BX2_spec.$procdff$1335 ($adff): ARST=\X3_323_Z, D=$0\X57_10_Q[0:0], Q=\X57_10_Q
-Replacing COUNT_12BX2_spec.$procdff$1336 ($adff): ARST=\X3_323_Z, D=$0\X1712_Q[0:0], Q=\X1712_Q
-Replacing COUNT_12BX2_spec.$procdff$1337 ($adff): ARST=\X3_323_Z, D=$0\X1796_Q[0:0], Q=\X1796_Q
-Replacing COUNT_12BX2_spec.$procdff$1338 ($adff): ARST=\X3_323_Z, D=$0\X430_309_Q[0:0], Q=\X430_309_Q
-Replacing COUNT_12BX2_spec.$procdff$1339 ($adff): ARST=\X3_323_Z, D=$0\X351_44_Q[0:0], Q=\X351_44_Q
-Replacing COUNT_12BX2_spec.$procdff$1340 ($adff): ARST=\X3_323_Z, D=$0\X1797_Q[0:0], Q=\X1797_Q
-Replacing COUNT_12BX2_spec.$procdff$1341 ($adff): ARST=\X1676_Z, D=$0\mi1_qt1_r[0:0], Q=\mi1_qt1_r
-Replacing COUNT_12BX2_spec.$procdff$1342 ($adff): ARST=\X3_323_Z, D=$0\X1804_Q[0:0], Q=\X1804_Q
-Replacing COUNT_12BX2_spec.$procdff$1343 ($adff): ARST=\X3_323_Z, D=$0\X1849_Q[0:0], Q=\X1849_Q
-Replacing COUNT_12BX2_spec.$procdff$1344 ($adff): ARST=\X3_323_Z, D=$0\X1802_Q[0:0], Q=\X1802_Q
-Replacing COUNT_12BX2_spec.$procdff$1345 ($adff): ARST=\X3_323_Z, D=$0\X1801_Q[0:0], Q=\X1801_Q
-Replacing COUNT_12BX2_spec.$procdff$1346 ($adff): ARST=\X3_323_Z, D=$0\X1803_Q[0:0], Q=\X1803_Q
-Replacing COUNT_12BX2_spec.$procdff$1347 ($adff): ARST=\X3_323_Z, D=$0\X0_1625_Q[0:0], Q=\X0_1625_Q
-Replacing COUNT_12BX2_spec.$procdff$1348 ($adff): ARST=\X3_323_Z, D=$0\X0_1626_Q[0:0], Q=\X0_1626_Q
-Replacing COUNT_12BX2_spec.$procdff$1349 ($adff): ARST=\X3_323_Z, D=$0\X1806_Q[0:0], Q=\X1806_Q
-Replacing COUNT_12BX2_spec.$procdff$1350 ($adff): ARST=\X3_323_Z, D=$0\X1805_Q[0:0], Q=\X1805_Q
-Replacing COUNT_12BX2_spec.$procdff$1351 ($adff): ARST=\X3_323_Z, D=$0\mi1_qt0_r[0:0], Q=\mi1_qt0_r
+Replacing COUNT_12BX2_spec.$procdff$1364 ($adff): ARST=\X3_323_Z, D=$0\X1849_Q[0:0], Q=\X1849_Q
+Replacing COUNT_12BX2_spec.$procdff$1365 ($adff): ARST=\X3_323_Z, D=$0\X1806_Q[0:0], Q=\X1806_Q
+Replacing COUNT_12BX2_spec.$procdff$1366 ($adff): ARST=\X3_323_Z, D=$0\X1805_Q[0:0], Q=\X1805_Q
+Replacing COUNT_12BX2_spec.$procdff$1367 ($adff): ARST=\X3_323_Z, D=$0\X1804_Q[0:0], Q=\X1804_Q
+Replacing COUNT_12BX2_spec.$procdff$1368 ($adff): ARST=\X3_323_Z, D=$0\X1803_Q[0:0], Q=\X1803_Q
+Replacing COUNT_12BX2_spec.$procdff$1369 ($adff): ARST=\X3_323_Z, D=$0\X1802_Q[0:0], Q=\X1802_Q
+Replacing COUNT_12BX2_spec.$procdff$1370 ($adff): ARST=\X3_323_Z, D=$0\X1801_Q[0:0], Q=\X1801_Q
+Replacing COUNT_12BX2_spec.$procdff$1371 ($adff): ARST=\X1676_Z, D=$0\r_MI1_QT_1[0:0], Q=\r_MI1_QT_1
+Replacing COUNT_12BX2_spec.$procdff$1372 ($adff): ARST=\X1676_Z, D=$0\X1798_Q[0:0], Q=\X1798_Q
+Replacing COUNT_12BX2_spec.$procdff$1373 ($adff): ARST=\X3_323_Z, D=$0\X1797_Q[0:0], Q=\X1797_Q
+Replacing COUNT_12BX2_spec.$procdff$1374 ($adff): ARST=\X3_323_Z, D=$0\X1796_Q[0:0], Q=\X1796_Q
+Replacing COUNT_12BX2_spec.$procdff$1375 ($adff): ARST=\X1676_Z, D=$0\X1795_Q[0:0], Q=\X1795_Q
+Replacing COUNT_12BX2_spec.$procdff$1376 ($adff): ARST=\X3_323_Z, D=$0\X1713_Q[0:0], Q=\X1713_Q
+Replacing COUNT_12BX2_spec.$procdff$1377 ($adff): ARST=\X3_323_Z, D=$0\X1712_Q[0:0], Q=\X1712_Q
+Replacing COUNT_12BX2_spec.$procdff$1378 ($adff): ARST=\X3_323_Z, D=$0\X430_309_Q[0:0], Q=\X430_309_Q
+Replacing COUNT_12BX2_spec.$procdff$1379 ($adff): ARST=\X3_323_Z, D=$0\X351_44_Q[0:0], Q=\X351_44_Q
+Replacing COUNT_12BX2_spec.$procdff$1380 ($adff): ARST=\X3_323_Z, D=$0\X63_1886_Q[0:0], Q=\X63_1886_Q
+Replacing COUNT_12BX2_spec.$procdff$1381 ($adff): ARST=\X3_323_Z, D=$0\X57_10_Q[0:0], Q=\X57_10_Q
+Replacing COUNT_12BX2_spec.$procdff$1382 ($adff): ARST=\X3_323_Z, D=$0\X0_1715_Q[0:0], Q=\X0_1715_Q
+Replacing COUNT_12BX2_spec.$procdff$1383 ($adff): ARST=\X3_323_Z, D=$0\X0_1626_Q[0:0], Q=\X0_1626_Q
+Replacing COUNT_12BX2_spec.$procdff$1384 ($adff): ARST=\X3_323_Z, D=$0\X0_1625_Q[0:0], Q=\X0_1625_Q
+Replacing COUNT_12BX2_spec.$procdff$1385 ($adff): ARST=\X3_323_Z, D=$0\r_MI1_QT_0[0:0], Q=\r_MI1_QT_0
 
 11. Executing EQUIV_MAKE pass (creating equiv checking module).
 Presumably equivalent wires: COUNT0_gold (\COUNT0_gold), COUNT0_gate (\COUNT0_gate) -> COUNT0
@@ -1665,7 +1907,7 @@ Presumably equivalent wires: CTRL2_gold (\CTRL2_gold), CTRL2_gate (\CTRL2_gate) 
 Presumably equivalent wires: DT_gold (\DT_gold), DT_gate (\DT_gate) -> DT
 Presumably equivalent wires: HOLD0_gold (\HOLD0_gold), HOLD0_gate (\HOLD0_gate) -> HOLD0
 Presumably equivalent wires: HOLD1_gold (\HOLD1_gold), HOLD1_gate (\HOLD1_gate) -> HOLD1
-Presumably equivalent wires: MI1_QT_gold ({ \mi1_qt1_r_gold \mi1_qt0_r_gold }), MI1_QT_gate ({ \X1800.Q_reg_gate \X0_335.Q_reg_gate }) -> MI1_QT
+Presumably equivalent wires: MI1_QT_gold ({ \r_MI1_QT_1_gold \r_MI1_QT_0_gold }), MI1_QT_gate ({ \X1800.Q_reg_gate \X0_335.Q_reg_gate }) -> MI1_QT
 Presumably equivalent wires: MI1_SUM_gold (\MI1_SUM_gold), MI1_SUM_gate ({ \X8589.Z_gate \X410_22.Z_gate \X19_13.Z_gate \X771_346.Z_gate \X8588.Z_gate \X169_13.Z_gate \X8569.Z_gate \X8581.Z_gate \X8576.Z_gate \X168_13.Z_gate \X773_346.Z_gate }) -> MI1_SUM
 Presumably equivalent wires: MI44_Q_gold (\MI44_Q_gold), MI44_Q_gate (\MI44_Q_gate) -> MI44_Q
 Presumably equivalent wires: SET0N_gold (\SET0N_gold), SET0N_gate (\SET0N_gate) -> SET0N
@@ -2093,8 +2335,8 @@ Found 197 $equiv cells in equiv:
   Of those cells 197 are proven and 0 are unproven.
   Equivalence successfully proven!
 
-Warnings: 194 unique messages, 194 total
-End of script. Logfile hash: 8b036c5fbe
-CPU: user 2.14s system 0.02s, MEM: 41.35 MB total, 33.38 MB resident
+Warnings: 194 unique messages, 368 total
+End of script. Logfile hash: 348c66ae67
+CPU: user 1.57s system 0.04s, MEM: 41.62 MB total, 35.75 MB resident
 Yosys 0.9 (git sha1 1979e0b)
-Time spent: 56% 1x equiv_simple (1 sec), 16% 1x equiv_induct (0 sec), ...
+Time spent: 56% 1x equiv_simple (0 sec), 14% 1x equiv_induct (0 sec), ...
